@@ -1,0 +1,17 @@
+{
+  "name": "Disney World & Musicals Explorer",
+  "short_name": "DisneyWorld",
+  "description": "Wereldwijde Disney Parken, Wachttijden & Musicals (Gebouwd met REA)",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#1e1b4b",
+  "icons": [
+    {
+      "src": "./apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
