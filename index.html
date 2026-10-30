@@ -23,6 +23,8 @@
       --accent-glow: #818cf8;
       --gold: #fbbf24;
       --green: #34d399;
+      --orange: #fb923c;
+      --red: #f87171;
       --hero-bg: linear-gradient(135deg, #312e81 0%, #1e1b4b 100%);
       --hero-border: rgba(129, 140, 248, 0.4);
     }
@@ -121,7 +123,7 @@
       background-attachment: fixed;
       color: var(--text);
       padding-top: calc(env(safe-area-inset-top, 16px) + 12px);
-      padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 84px);
+      padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 88px);
       padding-left: 16px;
       padding-right: 16px;
       max-width: 720px;
@@ -134,10 +136,10 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .title-wrap h1 {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 800;
       margin: 0;
       letter-spacing: -0.02em;
@@ -172,7 +174,7 @@
       background: var(--hero-bg);
       border: 1.5px solid var(--hero-border);
       border-radius: 18px;
-      padding: 12px 14px;
+      padding: 11px 14px;
       margin-bottom: 10px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
@@ -200,7 +202,7 @@
     .season-title {
       font-size: 15px;
       font-weight: 800;
-      margin: 6px 0 2px 0;
+      margin: 5px 0 2px 0;
       position: relative;
       z-index: 2;
     }
@@ -261,12 +263,13 @@
       color: #fff;
     }
 
+    /* Park Selector */
     .parks-scroll {
       display: flex;
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       scrollbar-width: none;
     }
     .parks-scroll::-webkit-scrollbar { display: none; }
@@ -279,30 +282,62 @@
       padding: 8px 12px;
       text-align: left;
       cursor: pointer;
-      min-width: 150px;
+      min-width: 158px;
       transition: all 0.2s ease;
     }
     .park-pill.active {
       border-color: var(--accent-glow);
       background: var(--card-alt);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
-    .park-pill .country { font-size: 12px; color: var(--muted); }
-    .park-pill .pname { font-size: 13px; font-weight: 700; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .park-pill .country { font-size: 11.5px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+    .park-pill .pname { font-size: 13px; font-weight: 800; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .park-pill .pwait { font-size: 11px; color: var(--gold); font-weight: 700; margin-top: 2px; }
+
+    /* Stats Row */
     .stats-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 12px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
     }
     .stat-box {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 10px;
+      padding: 8px 6px;
       text-align: center;
     }
-    .stat-box .lbl { font-size: 12px; color: var(--muted); }
-    .stat-box .val { font-size: 17px; font-weight: 800; margin-top: 2px; }
+    .stat-box .lbl { font-size: 11px; color: var(--muted); }
+    .stat-box .val { font-size: 15px; font-weight: 800; margin-top: 2px; }
+
+    /* Sub-filter pills for Attractions */
+    .filter-scroll {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+      scrollbar-width: none;
+    }
+    .filter-scroll::-webkit-scrollbar { display: none; }
+    .filter-pill {
+      flex: 0 0 auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 10px;
+      padding: 6px 11px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .filter-pill.active {
+      background: var(--card-alt);
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
     .search-bar {
       width: 100%;
       background: var(--card);
@@ -315,12 +350,25 @@
       outline: none;
     }
     .search-bar::placeholder { color: var(--muted); opacity: 0.8; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 4px 2px 8px 2px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
     .card-list { display: flex; flex-direction: column; gap: 10px; }
     .item-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 14px;
+      padding: 13px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -333,9 +381,9 @@
     .item-info { flex: 1; min-width: 0; }
     .badge {
       display: inline-block;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 6px;
       background: var(--card-alt);
       color: var(--accent-glow);
@@ -359,6 +407,22 @@
       color: var(--muted);
       margin: 0;
     }
+
+    /* Visual Wait Time Progress Bar inside Attraction Card */
+    .wait-bar-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 7px;
+    }
+    .wait-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.35s ease;
+    }
+
     .right-col {
       display: flex;
       flex-direction: column;
@@ -366,21 +430,41 @@
       gap: 6px;
       flex-shrink: 0;
     }
-    .wait-pill {
-      font-size: 13px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 999px;
+    .wait-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 68px;
+      padding: 6px 10px;
+      border-radius: 12px;
       background: var(--card-alt);
+      border: 1px solid var(--border);
+      text-align: center;
     }
-    .wait-pill.open { color: var(--green); }
+    .wait-box .num {
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.05;
+    }
+    .wait-box .unit {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-top: 1px;
+    }
+    .wait-box.short { color: var(--green); border-color: rgba(52, 211, 153, 0.4); }
+    .wait-box.medium { color: var(--gold); border-color: rgba(251, 191, 36, 0.45); }
+    .wait-box.long { color: var(--red); border-color: rgba(248, 113, 113, 0.5); }
+
     .fav-btn {
       background: var(--card-alt);
       color: var(--text);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 6px 10px;
-      font-size: 12px;
+      padding: 5px 10px;
+      font-size: 11.5px;
       font-weight: 700;
       cursor: pointer;
     }
@@ -389,6 +473,7 @@
       color: #fff;
       border-color: var(--accent);
     }
+
     .tab-bar {
       position: fixed;
       bottom: 0;
@@ -407,7 +492,7 @@
       background: none;
       border: none;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
       display: flex;
       flex-direction: column;
@@ -417,28 +502,16 @@
     }
     .tab-item.active { color: var(--accent-glow); font-weight: 800; }
     .tab-item .ico { font-size: 18px; }
-    .install-banner {
-      background: var(--card-alt);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 10px 14px;
-      font-size: 12px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
   </style>
 </head>
 <body data-season="halloween">
   <div class="header">
     <div class="title-wrap">
       <h1 id="app-main-title">🎃 Disney World & Musicals</h1>
-      <p id="status-line">REA Snapshot + Live API • 12 Parken</p>
+      <p id="status-line">Bezig met live wachttijden ophalen...</p>
     </div>
-    <button class="refresh-btn" onclick="refreshCurrentParkLive()">
-      <span id="refresh-icon">🔄</span> Live
+    <button class="refresh-btn" onclick="refreshCurrentParkLive(true)">
+      <span id="refresh-icon">🔄</span> Nu Live
     </button>
   </div>
 
@@ -456,15 +529,10 @@
   <!-- Season Switcher (Auto + Preview Kerst, etc.) -->
   <div id="season-bar" class="season-scroll"></div>
 
-  <div id="install-hint" class="install-banner">
-    <span>📲 <strong>Op je iPhone:</strong> Tik in Safari op <strong>Deel (↑)</strong> → <strong>Zet op beginscherm</strong>!</span>
-    <button onclick="document.getElementById('install-hint').style.display='none'" style="background:none;border:none;color:var(--muted);font-weight:bold;cursor:pointer;">✕</button>
-  </div>
-
   <!-- Park Horizontal Selector -->
   <div id="parks-bar" class="parks-scroll"></div>
 
-  <!-- Main Content Area -->
+  <!-- Main Content Area (Attracties / Musicals) -->
   <div id="main-explore">
     <div class="stats-row">
       <div class="stat-box">
@@ -472,60 +540,87 @@
         <div id="st-open" class="val">-</div>
       </div>
       <div class="stat-box">
-        <div class="lbl">Shows & Musicals</div>
-        <div id="st-shows" class="val">-</div>
+        <div class="lbl">Gem. Wachtrij</div>
+        <div id="st-avg" class="val">-</div>
       </div>
       <div class="stat-box">
-        <div class="lbl">Piek Wachttijd</div>
+        <div class="lbl">Piek Wachtrij</div>
         <div id="st-max" class="val">-</div>
+      </div>
+      <div class="stat-box">
+        <div class="lbl">Shows Vandaag</div>
+        <div id="st-shows" class="val">-</div>
       </div>
     </div>
 
-    <input id="search-box" class="search-bar" type="search" placeholder="Zoek attractie, show of musical (bijv. Frozen, Lion King, Haunted)..." oninput="renderList()" />
+    <!-- Quick Filter Bar for Rides -->
+    <div id="ride-filters" class="filter-scroll">
+      <button id="flt-all" class="filter-pill active" onclick="setRideFilter('all')">🎢 Alle Attracties</button>
+      <button id="flt-open" class="filter-pill" onclick="setRideFilter('open')">🟢 Nu Open</button>
+      <button id="flt-short" class="filter-pill" onclick="setRideFilter('short')">⚡ Korte rij (&le; 20 min)</button>
+      <button id="flt-top" class="filter-pill" onclick="setRideFilter('top')">🔥 Top Drukste (&ge; 35 min)</button>
+      <button id="flt-season" class="filter-pill" onclick="setRideFilter('season')">✨ Seizoens-tips</button>
+    </div>
+
+    <input id="search-box" class="search-bar" type="search" placeholder="Zoek attractie of musical (bijv. Big Thunder, Peter Pan, Frozen)..." oninput="renderList()" />
+    <div id="list-header" class="section-header">
+      <span id="list-title">🎢 Attracties & Actuele Wachttijden</span>
+      <span id="list-count"></span>
+    </div>
     <div id="items-container" class="card-list"></div>
   </div>
 
-  <div id="main-planner" style="display:none;">
-    <div class="card-list" id="planner-container"></div>
+  <!-- Global 12 Parks Overview Tab -->
+  <div id="main-world" style="display:none;">
+    <div class="section-header">
+      <span>🌍 Alle 12 Disney Parken (Live Status)</span>
+      <span>Tik op een park</span>
+    </div>
+    <div class="card-list" id="world-container"></div>
   </div>
 
-  <div id="main-rea" style="display:none;">
-    <div class="item-card" style="flex-direction:column;align-items:flex-start;">
-      <span class="badge musical">🔍 REA Reverse Engineering + Seizoens-Engine</span>
-      <h3 class="item-title">Hoe past jouw app zich automatisch aan?</h3>
-      <p class="item-sub" style="line-height:1.55;">
-        1. <strong>Automatische Disney Feestdagen Kalender:</strong> De app kijkt naar de datum op je iPhone. Tot en met 4 november staat hij automatisch in het <strong>🎃 Disney Halloween Festival</strong> thema. Vanaf <strong>5 november</strong> schakelt de app vanzelf over naar <strong>🎄 Disney Betoverende Kerst (Enchanted Christmas)</strong>!<br/><br/>
-        2. <strong>Alvast vooruitkijken:</strong> Met de knoppenbalk bovenaan kun je nu al op <strong>🎄 Kerst</strong> tikken om de kerst-look &amp; feel te bewonderen.<br/><br/>
-        3. <strong>Ontdekt met REA MCP:</strong> Onder de motorkap haalt de app live wachttijden en showtijden op voor alle 12 Disney-parken wereldwijd.
-      </p>
+  <!-- Day Planner Tab -->
+  <div id="main-planner" style="display:none;">
+    <div class="section-header">
+      <span>⭐ Jouw Bewaarde Dagplan</span>
+      <span id="planner-sub"></span>
     </div>
+    <div class="card-list" id="planner-container"></div>
   </div>
 
   <!-- iOS Bottom Tab Bar -->
   <nav class="tab-bar">
-    <button id="nav-all" class="tab-item active" onclick="setTab('all')">
-      <span id="nav-park-ico" class="ico">🏰</span>
-      <span>Parken</span>
+    <button id="nav-rides" class="tab-item active" onclick="setTab('rides')">
+      <span class="ico">🎢</span>
+      <span>Wachttijden</span>
     </button>
     <button id="nav-musicals" class="tab-item" onclick="setTab('musicals')">
       <span class="ico">🎭</span>
       <span>Musicals & Shows</span>
     </button>
+    <button id="nav-world" class="tab-item" onclick="setTab('world')">
+      <span id="nav-park-ico" class="ico">🌍</span>
+      <span>12 Parken</span>
+    </button>
     <button id="nav-planner" class="tab-item" onclick="setTab('planner')">
       <span class="ico">⭐</span>
       <span>Dagplan (<span id="fav-count">0</span>)</span>
-    </button>
-    <button id="nav-rea" class="tab-item" onclick="setTab('rea')">
-      <span class="ico">🔍</span>
-      <span>REA Info</span>
     </button>
   </nav>
 
   <script>
     const DATA = {"evidence_id":"ev_d2e908e58052f5e243b83635b14ac49e37819da8bff11d98fbdee6dda24b305d","captured_at":"2026-10-30T20:51:31+01:00","parks":[{"id":"dae968d5-630d-4719-8b06-3d107e944401","name":"Disneyland Park","resort":"Disneyland Paris","country":"Frankrijk 🇫🇷","timezone":"Europe/Paris","sha256":"595a097208c507f4ccab02c8c04b966dab1a2a9c73849cdc4ea115490fe74379","totalAttractions":37,"openAttractions":23,"totalShows":16,"attractions":[{"name":"Big Thunder Mountain","status":"OPERATING","waitTime":70,"paidPrice":"18,00 €"},{"name":"Autopia, presented by Avis","status":"OPERATING","waitTime":45,"paidPrice":"9,00 €"},{"name":"Peter Pan's Flight","status":"OPERATING","waitTime":35,"paidPrice":"19,00 €"},{"name":"Buzz Lightyear Laser Blast","status":"OPERATING","waitTime":30,"paidPrice":"16,00 €"},{"name":"Orbitron®","status":"OPERATING","waitTime":30,"paidPrice":"9,00 €"},{"name":"Les Voyages de Pinocchio","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Dumbo the Flying Elephant","status":"OPERATING","waitTime":20,"paidPrice":null},{"name":"Star Wars Hyperspace Mountain","status":"OPERATING","waitTime":15,"paidPrice":"16,00 €"},{"name":"Pirates of the Caribbean","status":"OPERATING","waitTime":10,"paidPrice":"9,00 €"},{"name":"Phantom Manor","status":"OPERATING","waitTime":10,"paidPrice":"5,00 €"},{"name":"Indiana Jones™ and the Temple of Peril","status":"OPERATING","waitTime":10,"paidPrice":"9,00 €"},{"name":"Le Carrousel de Lancelot","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Star Tours: The Adventures Continue*","status":"OPERATING","waitTime":5,"paidPrice":"5,00 €"},{"name":"La Cabane des Robinson","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Mad Hatter's Tea Cups","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"\"it's a small world\"","status":"OPERATING","waitTime":5,"paidPrice":"5,00 €"},{"name":"Les Mystères du Nautilus","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Le Passage Enchanté d'Aladdin","status":"OPERATING","waitTime":0,"paidPrice":null},{"name":"Pirates' Beach","status":"OPERATING","waitTime":0,"paidPrice":null},{"name":"Adventure Isle","status":"OPERATING","waitTime":0,"paidPrice":null},{"name":"Rustler Roundup Shootin' Gallery","status":"OPERATING","waitTime":0,"paidPrice":null},{"name":"Disneyland Railroad Fantasyland Station","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Frontierland Playground","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Alice's Curious Labyrinth","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Thunder Mesa Riverboat Landing","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Disneyland Railroad Discoveryland Station","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"La Galerie de la Belle au Bois Dormant","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Disneyland Railroad Frontierland Depot","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Horse-Drawn Streetcars","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Pirate Galleon","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Casey Jr. – le Petit Train du Cirque","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"La Tanière du Dragon","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Blanche-Neige et les Sept Nains®","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Le Pays des Contes de Fées, presented by Vittel","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Disneyland Railroad Main Street Station","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Mickey’s PhilharMagic","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Main Street Vehicles","status":"CLOSED","waitTime":null,"paidPrice":null}],"shows":[{"name":"Meet Minnie or her friends across Europe","status":"OPERATING","showtimes":["10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30"]},{"name":"Meet Stitch","status":"OPERATING","showtimes":["08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30"]},{"name":"Meet Daisy and Donald","status":"OPERATING","showtimes":["08:30","09:00","09:30","10:00","10:30","12:00","12:30","13:00","13:30"]},{"name":"Meet a goofy skeleton or his friend","status":"OPERATING","showtimes":["10:45","11:15","11:45","12:15","12:45","15:15","15:45","16:15"]},{"name":"Mysterious Meeting","status":"OPERATING","showtimes":["10:00","10:30","11:00","11:30","12:00","14:30","15:00","15:30"]},{"name":"An Encounter with Jafar","status":"OPERATING","showtimes":["09:30","10:00","10:30","13:00","13:30","14:00","14:30","15:00"]},{"name":"An Encounter with Captain Hook","status":"OPERATING","showtimes":["13:30","14:00","14:30","15:00","15:30","16:00","16:30"]},{"name":"Meet Chip and Dale","status":"OPERATING","showtimes":["10:45","11:15","11:45","12:15","15:15","15:45"]},{"name":"Dr. Facilier Encounter","status":"OPERATING","showtimes":["09:30","13:30","16:00","17:00","18:15"]},{"name":"The Lion King: Rhythms of the Pride Lands","status":"OPERATING","showtimes":["12:10","13:10","15:45","16:45"]},{"name":"An Encounter with the Queen of Hearts or with your friends from Wonderland","status":"OPERATING","showtimes":["12:45","13:00","13:30","14:00"]},{"name":"Mickey’s Halloween Celebration","status":"OPERATING","showtimes":["15:25","17:00"]},{"name":"Reserved viewing area: Disney Stars on Parade","status":"OPERATING","showtimes":["11:30"]},{"name":"Reserved viewing area: Disney Tales of Magic","status":"OPERATING","showtimes":["22:00"]},{"name":"Disney Stars on Parade","status":"OPERATING","showtimes":["11:30"]},{"name":"Disney Tales of Magic","status":"OPERATING","showtimes":["22:00"]}]},{"id":"ca888437-ebb4-4d50-aed2-d227f7096968","name":"Disney Adventure World","resort":"Disneyland Paris","country":"Frankrijk 🇫🇷","timezone":"Europe/Paris","sha256":"c0049e2563f956a4cb195e7810b5d0f5b8859e215b08e565e77684cfa1842968","totalAttractions":13,"openAttractions":11,"totalShows":13,"attractions":[{"name":"Frozen Ever After","status":"OPERATING","waitTime":60,"paidPrice":"23,00 €"},{"name":"Ratatouille : L’Aventure Totalement Toquée de Rémy","status":"OPERATING","waitTime":35,"paidPrice":"18,00 €"},{"name":"Toy Soldiers Parachute Drop","status":"OPERATING","waitTime":35,"paidPrice":null},{"name":"RC Racer","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Spider-Man W.E.B. Adventure","status":"OPERATING","waitTime":25,"paidPrice":"18,00 €"},{"name":"Avengers Assemble: Flight Force","status":"OPERATING","waitTime":25,"paidPrice":"12,00 €"},{"name":"The Twilight Zone Tower of Terror","status":"OPERATING","waitTime":15,"paidPrice":"16,00 €"},{"name":"Cars Quatre Roues Rallye","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Slinky® Dog Zigzag Spin","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Raiponce Tangled Spin","status":"OPERATING","waitTime":5,"paidPrice":"5,00 €"},{"name":"Les Tapis Volants - Flying Carpets Over Agrabah®","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Cars ROAD TRIP","status":"CLOSED","waitTime":null,"paidPrice":"5,00 €"},{"name":"Crush's Coaster","status":"CLOSED","waitTime":null,"paidPrice":null}],"shows":[{"name":"Stitch Live!","status":"OPERATING","showtimes":["10:30","10:50","11:10","11:30","11:50","12:10","12:30","12:50","13:10","13:30","13:50","14:10","14:30","14:50","15:10","15:30","15:50","16:10","16:30","16:50","17:10","17:30","17:50","18:10"]},{"name":"Animation Academy","status":"OPERATING","showtimes":["10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00"]},{"name":"Meet Mickey","status":"OPERATING","showtimes":["10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30"]},{"name":"Meet Jessie","status":"OPERATING","showtimes":["10:30","11:00","11:30","12:00","12:30","15:00","15:30","16:00"]},{"name":"Meet a Toy Story Character","status":"OPERATING","showtimes":["10:45","11:15","11:45","12:15","12:45","15:15","15:45"]},{"name":"Mickey and the Magician","status":"OPERATING","showtimes":["13:00","14:05","15:10","17:25","18:30"]},{"name":"TOGETHER: a Pixar Musical Adventure","status":"OPERATING","showtimes":["11:15","12:25","13:35","15:40","16:50"]},{"name":"Miguel's Fiesta Latina","status":"OPERATING","showtimes":["12:30","13:20","16:05","16:55","17:45"]},{"name":"A Celebration in Arendelle","status":"OPERATING","showtimes":["12:20","13:20","15:50","16:50","17:50"]},{"name":"Minnie’s Dream Factory","status":"OPERATING","showtimes":["12:00","13:00","14:00","16:20","17:20"]},{"name":"Disney Princess Cavalcade","status":"OPERATING","showtimes":["10:00","11:25","13:50","15:10"]},{"name":"Disney Cascade of Lights","status":"OPERATING","showtimes":["21:50"]},{"name":"Reserved Viewing Area : Disney Cascade of Lights","status":"OPERATING","showtimes":["21:50"]}]},{"id":"75ea578a-adc8-4116-a54d-dccb60765ef9","name":"Magic Kingdom Park","resort":"Walt Disney World","country":"Florida, VS 🇺🇸","timezone":"America/New_York","sha256":"8fe37add87c24ee3e29303d220b05db32dae377261733ab59f2a908358e4ced5","totalAttractions":36,"openAttractions":35,"totalShows":25,"attractions":[{"name":"TRON Lightcycle / Run","status":"OPERATING","waitTime":50,"paidPrice":"$23.00"},{"name":"Peter Pan's Flight","status":"OPERATING","waitTime":50,"paidPrice":null},{"name":"Seven Dwarfs Mine Train","status":"OPERATING","waitTime":50,"paidPrice":"$15.00"},{"name":"Buzz Lightyear’s Space Ranger Spin","status":"OPERATING","waitTime":45,"paidPrice":null},{"name":"Jungle Cruise","status":"OPERATING","waitTime":40,"paidPrice":null},{"name":"The Many Adventures of Winnie the Pooh","status":"OPERATING","waitTime":35,"paidPrice":null},{"name":"Space Mountain","status":"OPERATING","waitTime":30,"paidPrice":null},{"name":"Haunted Mansion","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Pirates of the Caribbean","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Tiana's Bayou Adventure","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Big Thunder Mountain Railroad","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Under the Sea - Journey of The Little Mermaid","status":"OPERATING","waitTime":20,"paidPrice":null},{"name":"Astro Orbiter","status":"OPERATING","waitTime":20,"paidPrice":null},{"name":"Walt Disney World Railroad - Main Street, U.S.A.","status":"OPERATING","waitTime":20,"paidPrice":null},{"name":"Walt Disney World Railroad - Fantasyland","status":"OPERATING","waitTime":20,"paidPrice":null},{"name":"The Hall of Presidents","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"The Barnstormer","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"\"it's a small world\"","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Mad Tea Party","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Country Bear Musical Jamboree","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Prince Charming Regal Carrousel","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Walt Disney's Enchanted Tiki Room","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Mickey's PhilharMagic","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Enchanted Tales with Belle","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Monsters, Inc. Laugh Floor","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Tomorrowland Speedway","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Tomorrowland Transit Authority PeopleMover","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Swiss Family Treehouse","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Dumbo the Flying Elephant","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"The Magic Carpets of Aladdin","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Trick-or-Treat Locations at Mickey's Not-So-Scary Halloween Party","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Walt Disney's Carousel of Progress","status":"REFURBISHMENT","waitTime":null,"paidPrice":null},{"name":"Main Street Vehicles","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Cinderella Castle","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"A Pirate's Adventure ~ Treasures of the Seven Seas","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Casey Jr. Splash 'N' Soak Station","status":"OPERATING","waitTime":null,"paidPrice":null}],"shows":[{"name":"The Dapper Dans","status":"OPERATING","showtimes":["09:00","09:50","10:40","12:05","13:10","14:55","15:55"]},{"name":"Casey's Corner Pianist","status":"OPERATING","showtimes":["10:50","12:00","13:15","14:35","15:15","16:35","17:30"]},{"name":"Mickey's Magical Friendship Faire","status":"OPERATING","showtimes":["10:00","11:35","12:45","14:55","16:00"]},{"name":"Main Street Philharmonic at Main Street, U.S.A.","status":"OPERATING","showtimes":["12:25","13:40","14:35","15:35"]},{"name":"Disney Starlight: Dream the Night Away","status":"OPERATING","showtimes":["19:45","22:00"]},{"name":"Meet Ariel at Her Grotto","status":"OPERATING","showtimes":["10:00"]},{"name":"Meet Daring Disney Pals as Circus Stars at Pete's Silly Sideshow","status":"OPERATING","showtimes":["10:00"]},{"name":"Flag Retreat","status":"OPERATING","showtimes":["17:00"]},{"name":"Happily Ever After","status":"OPERATING","showtimes":["21:00"]},{"name":"Meet Cinderella and a Visiting Princess at Princess Fairytale Hall","status":"OPERATING","showtimes":["09:00"]},{"name":"Meet Mickey at Town Square Theater","status":"OPERATING","showtimes":["09:00"]},{"name":"Meet Dashing Disney Pals as Circus Stars at Pete's Silly Sideshow","status":"OPERATING","showtimes":["10:00"]},{"name":"Meet Princess Tiana and a Visiting Princess at Princess Fairytale Hall","status":"OPERATING","showtimes":["09:00"]},{"name":"Disney Festival of Fantasy Parade","status":"OPERATING","showtimes":["14:00"]},{"name":"Disney Adventure Friends Cavalcade","status":"OPERATING","showtimes":["11:05"]},{"name":"Disney’s Not-So-Spooky Spectacular at Mickey's Not-So-Scary Halloween Party","status":"CLOSED","showtimes":[]},{"name":"Meet Mickey Mouse and Minnie Mouse at Mickey's Not-So-Scary Halloween Party","status":"CLOSED","showtimes":[]},{"name":"Mickey’s Boo-To-You Halloween Parade at Mickey's Not-So-Scary Halloween Party","status":"CLOSED","showtimes":[]},{"name":"Hocus Pocus Villain Spelltacular","status":"CLOSED","showtimes":[]},{"name":"Destination DescenDANCE Party at Mickey’s Not-So-Scary Halloween Party","status":"CLOSED","showtimes":[]},{"name":"The Cadaver Dans Barbershop Quartet at Mickey's Not-So-Scary Halloween Party","status":"CLOSED","showtimes":[]},{"name":"Meet Jack Skellington and Sally at Mickey's Not-So-Scary Halloween Party","status":"CLOSED","showtimes":[]},{"name":"Stitch’s Masquerade Mashup at Mickey’s Not-So-Scary Halloween Party","status":"CLOSED","showtimes":[]},{"name":"Meet Festive Disney Pals at Mickey’s Not-So-Scary Halloween Party","status":"CLOSED","showtimes":[]},{"name":"Captain Jack’s Buccaneer Bash at Mickey’s Not-So-Scary Halloween Party","status":"CLOSED","showtimes":[]}]},{"id":"47f90d2c-e191-4239-a466-5892ef59a88b","name":"EPCOT","resort":"Walt Disney World","country":"Florida, VS 🇺🇸","timezone":"America/New_York","sha256":"190b2dba7e4c088d4cade43c912967875ee651db5b3950616154ae0491f47c92","totalAttractions":34,"openAttractions":32,"totalShows":24,"attractions":[{"name":"Frozen Ever After","status":"OPERATING","waitTime":60,"paidPrice":null},{"name":"Guardians of the Galaxy: Cosmic Rewind","status":"OPERATING","waitTime":55,"paidPrice":"$22.00"},{"name":"Remy's Ratatouille Adventure","status":"OPERATING","waitTime":50,"paidPrice":null},{"name":"Test Track","status":"OPERATING","waitTime":45,"paidPrice":null},{"name":"Soarin' Across America","status":"OPERATING","waitTime":30,"paidPrice":null},{"name":"Spaceship Earth","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Turtle Talk With Crush","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Mission: SPACE","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Gran Fiesta Tour Starring The Three Caballeros","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Journey Into Imagination With Figment","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Living with the Land","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"The Seas with Nemo & Friends","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Impressions de France","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Gallery of Arts and History","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"House of the Whispering Willows","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Palais du Cinéma","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"The American Adventure","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Bruce's Shark World","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Disney and Pixar Short Film Festival","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Kidcot Fun Stops","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Advanced Training Lab","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"ImageWorks - The \"What If\" Labs","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Awesome Planet","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"American Heritage Gallery","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Canada Far and Wide in Circle-Vision 360","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Stave Church Gallery","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Bijutsu-kan Gallery","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"SeaBase Aquarium","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Beauty and the Beast Sing-Along","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Mexico Folk Art Gallery","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Project Tomorrow: Inventing the Wonders of the Future","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Journey of Water, Inspired by Moana","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Reflections of China","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Living with the Land – Glimmering Greenhouses","status":"CLOSED","waitTime":null,"paidPrice":null}],"shows":[{"name":"Meet Pluto Near EPCOT Main Entrance","status":"OPERATING","showtimes":["09:00","09:30","10:00","10:30","11:00","11:30","12:00","13:45","14:15","14:45","15:15","15:45"]},{"name":"Meet One of the Three Caballeros in Mexico","status":"OPERATING","showtimes":["09:30","10:00","10:30","11:00","11:30","12:00","12:30","14:10","14:40","15:10","15:40","16:10"]},{"name":"Matsuriza","status":"OPERATING","showtimes":["11:00","12:00","13:00","14:00","15:00","16:00","16:45"]},{"name":"JAMMitors","status":"OPERATING","showtimes":["08:30","09:30","10:30","11:30","13:00","14:00","15:00"]},{"name":"Sergio","status":"OPERATING","showtimes":["11:50","12:35","13:20","14:15","15:10","15:55","16:40"]},{"name":"Voices of Liberty","status":"OPERATING","showtimes":["11:15","12:00","12:45","13:30","14:15","15:00","15:45"]},{"name":"Mariachi Cobre","status":"OPERATING","showtimes":["11:15","12:00","12:45","13:30","15:00","15:45","16:30"]},{"name":"Rose & Crown Pub Musician","status":"OPERATING","showtimes":["13:30","14:15","16:00","17:00","18:00","19:00"]},{"name":"Entertainment at Germany Gazebo","status":"OPERATING","showtimes":["12:40","13:30","14:35","15:55","17:00","18:05"]},{"name":"¡Celebración Encanto!","status":"OPERATING","showtimes":["09:45","10:45","11:45","13:30","14:30","15:30"]},{"name":"Entertainment at Canada Mill Stage","status":"OPERATING","showtimes":["14:15","15:30","17:00","18:15","19:30"]},{"name":"Command Performance","status":"OPERATING","showtimes":["15:00","16:15","17:30","19:00","20:00"]},{"name":"Meet the Legendary Warrior in China","status":"OPERATING","showtimes":["11:15","12:25","14:20","15:30"]},{"name":"Meet Asha Near World Showcase Plaza","status":"OPERATING","showtimes":["10:45","11:55","14:00","15:00"]},{"name":"Meet Princess Aurora in France","status":"OPERATING","showtimes":["10:45","11:55","13:50","15:00"]},{"name":"Eat to the Beat Concert Series Presented by Enterprise® at EPCOT International Food & Wine Festival","status":"OPERATING","showtimes":["17:30","18:45","20:00"]},{"name":"Meet Figment Inside ImageWorks","status":"OPERATING","showtimes":["09:00","13:45"]},{"name":"Meet Anna and Elsa at Royal Sommerhus","status":"OPERATING","showtimes":["09:15"]},{"name":"Luminous The Symphony of Us","status":"OPERATING","showtimes":["21:00"]},{"name":"Meet Beloved Disney Pals at Mickey & Friends","status":"OPERATING","showtimes":["09:00"]},{"name":"Viva Mexico","status":"CLOSED","showtimes":[]},{"name":"Garden Rocks Concert Series at EPCOT International Flower & Garden Festival","status":"CLOSED","showtimes":[]},{"name":"Marimba de las Américas","status":"CLOSED","showtimes":[]},{"name":"Acrobatico!","status":"CLOSED","showtimes":[]}]},{"id":"288747d1-8b4f-4a64-867e-ea7c9b27bad8","name":"Disney's Hollywood Studios","resort":"Walt Disney World","country":"Florida, VS 🇺🇸","timezone":"America/New_York","sha256":"86ce532c5074be1854ba574c1dfbaa5811d2a7507171ee9b59f1155fa66456f6","totalAttractions":13,"openAttractions":13,"totalShows":17,"attractions":[{"name":"Slinky Dog Dash","status":"OPERATING","waitTime":60,"paidPrice":null},{"name":"Rock ’n’ Roller Coaster Starring The Muppets","status":"OPERATING","waitTime":55,"paidPrice":null},{"name":"Star Wars: Rise of the Resistance","status":"OPERATING","waitTime":45,"paidPrice":"$25.00"},{"name":"The Twilight Zone™ Tower of Terror","status":"OPERATING","waitTime":35,"paidPrice":null},{"name":"Toy Story Mania!","status":"OPERATING","waitTime":30,"paidPrice":null},{"name":"Millennium Falcon: Smugglers Run","status":"OPERATING","waitTime":30,"paidPrice":null},{"name":"Mickey & Minnie's Runaway Railway","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Alien Swirling Saucers","status":"OPERATING","waitTime":20,"paidPrice":null},{"name":"Star Tours – The Adventures Continue","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Vacation Fun - An Original Animated Short with Mickey & Minnie","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Once Upon a Studio Theater","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Olaf Draws!","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Walt Disney Presents","status":"OPERATING","waitTime":null,"paidPrice":null}],"shows":[{"name":"The Little Mermaid – A Musical Adventure","status":"OPERATING","showtimes":["10:35","11:10","11:45","12:20","12:55","13:30","14:05","14:40","15:15","15:50","16:25","17:00","17:35","18:10","18:45","19:20","19:55"]},{"name":"Disney Villains: Unfairly Ever After","status":"OPERATING","showtimes":["10:30","11:10","11:50","12:30","13:10","13:50","14:30","15:10","15:50","16:30","17:10","17:50","18:30","19:10","19:50"]},{"name":"Meet Joy at Pixar Plaza","status":"OPERATING","showtimes":["09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","14:00","14:30","15:00","15:30","16:00"]},{"name":"For the First Time in Forever: A Frozen Sing-Along Celebration","status":"OPERATING","showtimes":["09:30","10:30","11:30","12:30","13:30","14:30","15:30","16:30","17:30","18:30"]},{"name":"Disney Jr. Mickey Mouse Clubhouse Live!","status":"OPERATING","showtimes":["10:15","11:15","12:15","13:15","15:05","15:55","16:45","17:35"]},{"name":"First Order Searches for the Resistance","status":"OPERATING","showtimes":["11:30","12:30","13:30","14:30","16:30","17:30"]},{"name":"Green Army Drum Corps","status":"OPERATING","showtimes":["10:00","11:00","12:00","14:00","15:00","16:00"]},{"name":"Beauty and the Beast – Live on Stage","status":"OPERATING","showtimes":["11:00","13:00","14:00","16:00","17:00"]},{"name":"Indiana Jones™ Epic Stunt Spectacular!","status":"OPERATING","showtimes":["10:45","12:00","13:15","15:15","16:30"]},{"name":"Meet Disney Stars at Red Carpet Dreams","status":"OPERATING","showtimes":["09:00"]},{"name":"Meet Olaf at Celebrity Spotlight","status":"OPERATING","showtimes":["09:00"]},{"name":"Fantasmic!","status":"OPERATING","showtimes":["21:30"]},{"name":"Meet Edna Mode at the Edna Mode Experience","status":"OPERATING","showtimes":["09:00"]},{"name":"Disney Movie Magic","status":"OPERATING","showtimes":["20:40"]},{"name":"Wonderful World of Animation","status":"OPERATING","showtimes":["21:00"]},{"name":"Meet Ariel at Walt Disney Presents","status":"CLOSED","showtimes":[]},{"name":"Meet the Toys in Toy Story Land","status":"CLOSED","showtimes":[]}]},{"id":"1c84a229-8862-4648-9c71-378ddd2c7693","name":"Disney's Animal Kingdom Theme Park","resort":"Walt Disney World","country":"Florida, VS 🇺🇸","timezone":"America/New_York","sha256":"06f96e888df0646f7008f5e052bad40d80a1356d03a4d77eddff6ab12eaa1321","totalAttractions":16,"openAttractions":16,"totalShows":16,"attractions":[{"name":"Avatar Flight of Passage","status":"OPERATING","waitTime":40,"paidPrice":"$18.00"},{"name":"Na'vi River Journey","status":"OPERATING","waitTime":40,"paidPrice":null},{"name":"Kali River Rapids","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Bluey's Wild World at Conservation Station","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Zootopia: Better Zoogether!","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Expedition Everest - Legend of the Forbidden Mountain","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Kilimanjaro Safaris","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Wildlife Express Train","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Maharajah Jungle Trek","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Discovery Island Trails","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Wilderness Explorers","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Animal Care at Conservation Station","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Jumping Junction","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Tree of Life","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"The Oasis Exhibits","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Gorilla Falls Exploration Trail","status":"OPERATING","waitTime":null,"paidPrice":null}],"shows":[{"name":"Zoogether Day Gathering Spot","status":"OPERATING","showtimes":["09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00"]},{"name":"Festival of the Lion King","status":"OPERATING","showtimes":["10:00","11:00","12:00","13:00","14:00","15:00","16:00"]},{"name":"Viva Gaia Street Band!","status":"OPERATING","showtimes":["10:45","11:45","12:45","14:00","15:00","16:00","17:00"]},{"name":"Eco-Rhythmics","status":"OPERATING","showtimes":["08:35","09:35","10:30","11:30","12:30","14:00","15:00"]},{"name":"Finding Nemo: The Big Blue... and Beyond!","status":"OPERATING","showtimes":["11:00","12:00","13:00","14:30","15:30","16:30"]},{"name":"Kora Tinga Tinga","status":"OPERATING","showtimes":["10:45","11:45","12:45","13:45","14:45","15:45"]},{"name":"Animal Encounters: Winged Encounters – The Kingdom Takes Flight","status":"OPERATING","showtimes":["08:15","09:15","10:15","11:15","12:15"]},{"name":"Harambe Village Street Band – Burudika","status":"OPERATING","showtimes":["13:10","14:10","15:10","16:10","17:10"]},{"name":"Feathered Friends in Flight!","status":"OPERATING","showtimes":["10:45","11:45","13:45","14:45","15:45"]},{"name":"Tam Tam Drummers of Harambe","status":"OPERATING","showtimes":["08:10","09:10","10:10","11:10","12:10"]},{"name":"Meet Moana at Character Landing","status":"CLOSED","showtimes":["08:30","13:45"]},{"name":"Meet Favorite Disney Pals at Adventurers Outpost","status":"OPERATING","showtimes":["08:00"]},{"name":"DiVine","status":"OPERATING","showtimes":["08:35"]},{"name":"Tree of Life Awakenings","status":"CLOSED","showtimes":[]},{"name":"Beats and Strings","status":"CLOSED","showtimes":[]},{"name":"Adventures with Kevin on Discovery Island","status":"CLOSED","showtimes":[]}]},{"id":"7340550b-c14d-4def-80bb-acdb51d49a66","name":"Disneyland Park","resort":"Disneyland Resort","country":"Californië, VS 🇺🇸","timezone":"America/Los_Angeles","sha256":"18fddc6c9ebcc10f342111e75e9ccc8b66866f41f22932579132aa1c9a3df05e","totalAttractions":50,"openAttractions":44,"totalShows":24,"attractions":[{"name":"Haunted Mansion Holiday","status":"OPERATING","waitTime":70,"paidPrice":null},{"name":"Star Wars: Rise of the Resistance","status":"OPERATING","waitTime":55,"paidPrice":"$30.00"},{"name":"Indiana Jones™ Adventure","status":"OPERATING","waitTime":50,"paidPrice":null},{"name":"Matterhorn Bobsleds","status":"OPERATING","waitTime":35,"paidPrice":null},{"name":"Space Mountain","status":"OPERATING","waitTime":30,"paidPrice":null},{"name":"Peter Pan's Flight","status":"OPERATING","waitTime":30,"paidPrice":null},{"name":"Big Thunder Mountain Railroad","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Roger Rabbit's Car Toon Spin","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Alice in Wonderland","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Dumbo the Flying Elephant","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Finding Nemo Submarine Voyage","status":"OPERATING","waitTime":20,"paidPrice":null},{"name":"Astro Orbitor","status":"OPERATING","waitTime":20,"paidPrice":null},{"name":"Pirates of the Caribbean","status":"OPERATING","waitTime":20,"paidPrice":null},{"name":"The Many Adventures of Winnie the Pooh","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Chip 'n' Dale's GADGETcoaster","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Buzz Lightyear Astro Blasters","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Storybook Land Canal Boats","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Mickey & Minnie's Runaway Railway","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Autopia","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Snow White's Enchanted Wish","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Mark Twain Riverboat","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Mr. Toad's Wild Ride","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Tiana's Bayou Adventure","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Star Tours - The Adventures Continue","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Pirate's Lair on Tom Sawyer Island","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Jungle Cruise","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Disneyland Monorail","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Casey Jr. Circus Train","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Pinocchio's Daring Journey","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Millennium Falcon: Smugglers Run","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Mad Tea Party","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"King Arthur Carrousel","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Walt Disney - A Magical Life","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Walt Disney's Enchanted Tiki Room","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Great Moments with Mr. Lincoln","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"\"it's a small world\"","status":"REFURBISHMENT","waitTime":null,"paidPrice":null},{"name":"The Disney Gallery","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Pixar Short Film Spotlight","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Davy Crockett's Explorer Canoes","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Opera House - Walt Disney - A Magical Life","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Frontierland Shootin' Exposition","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Sleeping Beauty Castle Walkthrough","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Goofy's How-to-Play Yard","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Main Street Vehicles","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Minnie's House","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Sailing Ship Columbia","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Donald's Duck Pond","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Adventureland Treehouse inspired by Walt Disney’s Swiss Family Robinson","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Disneyland Railroad","status":"DOWN","waitTime":null,"paidPrice":null},{"name":"Main Street Cinema","status":"OPERATING","waitTime":null,"paidPrice":null}],"shows":[{"name":"Jambalaya Jazz","status":"OPERATING","showtimes":["11:00","12:00","13:00","14:00","15:05","16:00","17:00"]},{"name":"Main Street Piano Player","status":"OPERATING","showtimes":["11:00","11:55","12:50","14:00","15:20","16:15","17:05"]},{"name":"Storytelling at Royal Theatre","status":"OPERATING","showtimes":["10:15","11:25","12:40","14:15","15:25","16:35"]},{"name":"The Bootstrappers","status":"OPERATING","showtimes":["08:30","09:30","10:30","11:30","12:35","14:30"]},{"name":"The Dapper Dans","status":"OPERATING","showtimes":["11:00","12:15","13:10","14:20","16:15","17:00"]},{"name":"Bluey's Best Day Ever!","status":"OPERATING","showtimes":["11:00","12:20","13:40","15:25","16:45"]},{"name":"Tapestry of Happiness","status":"OPERATING","showtimes":["20:55","21:55","22:55","23:55"]},{"name":"Pearly Band at Castle Courtyard","status":"OPERATING","showtimes":["09:15","10:05","11:00","15:05"]},{"name":"Disneyland Band at Main Street, U.S.A.","status":"OPERATING","showtimes":["11:25","12:15","15:15","16:15"]},{"name":"Pearly Band near \"it's a small world\"","status":"OPERATING","showtimes":["11:50","13:05","14:05"]},{"name":"Fantasmic!","status":"OPERATING","showtimes":["21:00","22:30"]},{"name":"Disneyland Band at Frontierland","status":"OPERATING","showtimes":["10:30","14:15"]},{"name":"Mickey and Friends Halloween Cavalcade","status":"OPERATING","showtimes":["13:30","14:45"]},{"name":"Shadows of Memory: A Skywalker Saga","status":"OPERATING","showtimes":["20:30","22:15"]},{"name":"Halloween Screams with Fireworks","status":"OPERATING","showtimes":["21:30"]},{"name":"Disneyland Band at Castle Promenade","status":"OPERATING","showtimes":["13:05"]},{"name":"Meet Disney Princesses at Royal Hall","status":"OPERATING","showtimes":["10:00"]},{"name":"Mickey's House and Meet Mickey Mouse","status":"OPERATING","showtimes":["08:00"]},{"name":"Fire of the Rising Moons","status":"OPERATING","showtimes":["21:30"]},{"name":"Flag Retreat Ceremony","status":"OPERATING","showtimes":["16:15"]},{"name":"Jambalaya Jazz Band on the Mark Twain Riverboat","status":"CLOSED","showtimes":[]},{"name":"Disneyland Band at \"it's a small world\" Promenade","status":"CLOSED","showtimes":[]},{"name":"Main Street Straw Hatters","status":"CLOSED","showtimes":[]},{"name":"Halloween Screams with Projections","status":"CLOSED","showtimes":[]}]},{"id":"832fcd51-ea19-4e77-85c7-75d5843b127c","name":"Disney California Adventure Park","resort":"Disneyland Resort","country":"Californië, VS 🇺🇸","timezone":"America/Los_Angeles","sha256":"32319b1951301e6ce6cec42ddf0d169f0cc86d5084e8876297384e7f46d9dd43","totalAttractions":28,"openAttractions":25,"totalShows":21,"attractions":[{"name":"WEB SLINGERS: A Spider-Man Adventure","status":"OPERATING","waitTime":60,"paidPrice":null},{"name":"Radiator Springs Racers","status":"OPERATING","waitTime":60,"paidPrice":"$24.00"},{"name":"Guardians of the Galaxy - Mission: BREAKOUT!","status":"OPERATING","waitTime":45,"paidPrice":null},{"name":"Goofy's Sky School","status":"OPERATING","waitTime":45,"paidPrice":null},{"name":"Toy Story Midway Mania!","status":"OPERATING","waitTime":40,"paidPrice":null},{"name":"Monsters, Inc. Mike & Sulley to the Rescue!","status":"OPERATING","waitTime":35,"paidPrice":null},{"name":"Soarin’ Across America","status":"OPERATING","waitTime":35,"paidPrice":null},{"name":"Pixar Pal-A-Round - Swinging","status":"OPERATING","waitTime":25,"paidPrice":null},{"name":"Pixar Pal-A-Round – Non-Swinging","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Incredicoaster","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Inside Out Emotional Whirlwind","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"The Little Mermaid - Ariel's Undersea Adventure","status":"OPERATING","waitTime":15,"paidPrice":null},{"name":"Mater's Graveyard JamBOOree","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Mickey's PhilharMagic","status":"OPERATING","waitTime":10,"paidPrice":null},{"name":"Golden Zephyr","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Jessie's Critter Carousel","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Silly Symphony Swings","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Grizzly River Run","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Jumpin' Jellyfish","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Redwood Creek Challenge Trail","status":"OPERATING","waitTime":5,"paidPrice":null},{"name":"Games of Pixar Pier","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Guardians of the Galaxy - Monsters After Dark","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Villains Grove at Oogie Boogie Bash","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Sorcerer's Workshop","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Turtle Talk with Crush","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"Luigi's Honkin' Haul-O-Ween","status":"DOWN","waitTime":null,"paidPrice":null},{"name":"Animation Academy","status":"OPERATING","waitTime":null,"paidPrice":null},{"name":"The Bakery Tour","status":"OPERATING","waitTime":null,"paidPrice":null}],"shows":[{"name":"The Amazing Spider-Man!","status":"OPERATING","showtimes":["09:50","10:20","10:50","11:20","11:50","12:20","13:50","14:20","14:50","15:20","15:50","16:20"]},{"name":"Guardians of the Galaxy: Awesome Dance Off!","status":"OPERATING","showtimes":["15:30","16:30","17:30","18:45","19:35","20:25"]},{"name":"Operation: Playtime! - featuring the Green Army Patrol","status":"OPERATING","showtimes":["10:00","11:00","12:00","13:30","14:30","15:30"]},{"name":"Mickey's Trick and Treat at the Disney Theater","status":"OPERATING","showtimes":["10:45","11:45","12:45","14:30","15:30","16:30"]},{"name":"Paradise Garden Bandstand","status":"OPERATING","showtimes":["11:15","12:15","13:15","14:45","15:45","16:45"]},{"name":"The Storytellers of Plaza de la Familia Celebrate The Musical World of Coco!","status":"OPERATING","showtimes":["11:45","12:50","13:55","15:25","16:30"]},{"name":"Warriors of Wakanda: The Disciplines of the Dora Milaje","status":"OPERATING","showtimes":["11:30","13:30","15:00","16:00","17:00"]},{"name":"Five & Dime","status":"OPERATING","showtimes":["13:30","14:35","16:05","17:05","18:05"]},{"name":"Anna & Elsa's Royal Welcome","status":"OPERATING","showtimes":["09:00","09:45"]},{"name":"Disney® Visa® Cardmember Heroic Encounter","status":"OPERATING","showtimes":["15:00"]},{"name":"Avengers Headquarters","status":"OPERATING","showtimes":["08:00"]},{"name":"Meet Disney Pals on Buena Vista Street","status":"OPERATING","showtimes":["08:00"]},{"name":"World of Color – ONE","status":"OPERATING","showtimes":["21:00"]},{"name":"Meet the Residents of Radiator Springs in Cars Land","status":"OPERATING","showtimes":["08:00"]},{"name":"Palisades Stage","status":"CLOSED","showtimes":[]},{"name":"Madame Leota's Swinging Wake – A Haunted Mansion Street Party at Oogie Boogie Bash","status":"CLOSED","showtimes":[]},{"name":"Confection Purrfection with the SuperKitties","status":"CLOSED","showtimes":[]},{"name":"Cookin' with the Jammin’ Chefs","status":"CLOSED","showtimes":[]},{"name":"Citizens of Buena Vista Street","status":"CLOSED","showtimes":[]},{"name":"Meet Chef Goofy","status":"CLOSED","showtimes":[]},{"name":"Mariachi Alegría de Disneyland","status":"CLOSED","showtimes":[]}]},{"id":"3cc919f1-d16d-43e0-8c3f-1dd269bd1a42","name":"Tokyo Disneyland","resort":"Tokyo Disney Resort","country":"Japan 🇯🇵","timezone":"Asia/Tokyo","sha256":"de80b99ebedc2da30f388548d701d14489fb9a922c1068d8483adfedb27fd635","totalAttractions":37,"openAttractions":0,"totalShows":0,"attractions":[{"name":"Mark Twain Riverboat","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Beaver Brothers Explorer Canoes","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Stitch Encounter","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Tom Sawyer Island Rafts","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"“it's a small world”","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Castle Carrousel","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Donald's Boat","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Mickey's PhilharMagic","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Westernland Shootin' Gallery","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Monsters, Inc. Ride & Go Seek!","status":"CLOSED","waitTime":null,"paidPrice":"¥1,000"},{"name":"The Enchanted Tiki Room: Stitch Presents “Aloha E Komo Mai!”","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Star Tours: The Adventures Continue","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Gadget's Go Coaster","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Pirates of the Caribbean","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Minnie's House","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Penny Arcade","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Toon Park","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Pinocchio's Daring Journey","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Western River Railroad","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Roger Rabbit's Car Toon Spin","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Goofy's Paint 'n' Play House","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Dumbo The Flying Elephant","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Country Bear Theater","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Haunted Mansion “Holiday Nightmare”","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Chip 'n Dale's Treehouse","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Snow White's Adventures","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Pooh's Hunny Hunt","status":"CLOSED","waitTime":null,"paidPrice":"¥1,500"},{"name":"The Happy Ride with Baymax","status":"CLOSED","waitTime":null,"paidPrice":"¥1,500"},{"name":"Omnibus","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Alice's Tea Party","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Splash Mountain","status":"CLOSED","waitTime":null,"paidPrice":"¥1,500"},{"name":"Jungle Cruise: Wildlife Expeditions","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Big Thunder Mountain","status":"CLOSED","waitTime":null,"paidPrice":"¥1,500"},{"name":"Peter Pan's Flight","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Enchanted Tale of Beauty and the Beast","status":"CLOSED","waitTime":null,"paidPrice":"¥2,500"},{"name":"Cinderella's Fairy Tale Hall","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Swiss Family Treehouse","status":"CLOSED","waitTime":null,"paidPrice":null}],"shows":[]},{"id":"67b290d5-3478-4f23-b601-2f8fb71ba803","name":"Tokyo DisneySea","resort":"Tokyo Disney Resort","country":"Japan 🇯🇵","timezone":"Asia/Tokyo","sha256":"7b9def605d1ceb265b851cd4132db3410f84cc89ea03de4e22a7fe6b0e717bf6","totalAttractions":35,"openAttractions":0,"totalShows":0,"attractions":[{"name":"Rapunzel's Lantern Festival","status":"CLOSED","waitTime":null,"paidPrice":"¥2,000"},{"name":"Nemo & Friends SeaRider","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Lost River Delta (Miguel: until 1:00 p.m.)","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Venetian Gondolas","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Flounder's Flying Fish Coaster","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"DisneySea Electric Railway (American Waterfront)","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Soaring: Fantastic Flight","status":"CLOSED","waitTime":null,"paidPrice":"¥2,500"},{"name":"The Leonardo Challenge","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Tower of Terror","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Big City Vehicles","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Scuttle's Scooters","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Sindbad's Storybook Voyage","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Fortress Explorations","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Mermaid Lagoon Theater","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Turtle Talk","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"The Whirlpool","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Caravan Carousel","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"DisneySea Transit Steamer Line (Mediterranean Harbor)","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"DisneySea Transit Steamer Line (American Waterfront)","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Lost River Delta (Miguel: from 1:30 p.m.)","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Anna and Elsa's Frozen Journey","status":"CLOSED","waitTime":null,"paidPrice":"¥2,500"},{"name":"Ariel's Playground","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Toy Story Mania!","status":"CLOSED","waitTime":null,"paidPrice":"¥2,000"},{"name":"Jasmine's Flying Carpets","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Fairy Tinker Bell's Busy Buggies","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"20,000 Leagues Under the Sea","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Jumpin' Jellyfish","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Journey to the Center of the Earth","status":"CLOSED","waitTime":null,"paidPrice":"¥2,000"},{"name":"DisneySea Electric Railway (Port Discovery)","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"The Magic Lamp Theater","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Raging Spirits","status":"CLOSED","waitTime":null,"paidPrice":"¥1,500"},{"name":"DisneySea Transit Steamer Line (Lost River Delta)","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Peter Pan's Never Land Adventure","status":"CLOSED","waitTime":null,"paidPrice":"¥2,000"},{"name":"Blowfish Balloon Race","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Indiana Jones Adventure®: Temple of the Crystal Skull","status":"CLOSED","waitTime":null,"paidPrice":null}],"shows":[]},{"id":"ddc4357c-c148-4b36-9888-07894fe75e83","name":"Shanghai Disneyland","resort":"Shanghai Disney Resort","country":"China 🇨🇳","timezone":"Asia/Shanghai","sha256":"b306613c5f6264f21422e8c292eddd5e9538280ebf20f6ef6720b743df6094f5","totalAttractions":30,"openAttractions":0,"totalShows":51,"attractions":[{"name":"Seven Dwarfs Mine Train","status":"CLOSED","waitTime":50,"paidPrice":null},{"name":"TRON Lightcycle Power Run – Presented by Chevrolet","status":"CLOSED","waitTime":40,"paidPrice":null},{"name":"Rex’s Racer","status":"CLOSED","waitTime":20,"paidPrice":null},{"name":"Jet Packs","status":"CLOSED","waitTime":20,"paidPrice":null},{"name":"Fantasia Carousel","status":"CLOSED","waitTime":20,"paidPrice":null},{"name":"Space Chat With Stitch","status":"CLOSED","waitTime":15,"paidPrice":null},{"name":"Dumbo the Flying Elephant","status":"CLOSED","waitTime":15,"paidPrice":null},{"name":"Zootopia: Hot Pursuit","status":"CLOSED","waitTime":10,"paidPrice":null},{"name":"Soaring Over the Horizon","status":"CLOSED","waitTime":10,"paidPrice":null},{"name":"Slinky Dog Spin","status":"CLOSED","waitTime":10,"paidPrice":null},{"name":"Voyage to the Crystal Grotto","status":"CLOSED","waitTime":10,"paidPrice":null},{"name":"Challenge Trails at Camp Discovery","status":"CLOSED","waitTime":10,"paidPrice":null},{"name":"Become Iron Man at the Marvel Universe","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"Junior Explorers Camp","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"Woody’s Roundup","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"Peter Pan’s Flight","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"Shipwreck Shore","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"Pirates of the Caribbean Battle for the Sunken Treasure","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"Buzz Lightyear Planet Rescue","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"The Many Adventures of Winnie the Pooh","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"Siren's Revenge","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"Hunny Pot Spin","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"“Once Upon a Time” Adventure","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"Roaring Rapids","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"Pixar Adventurous Journey","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"Alice in Wonderland Maze","status":"CLOSED","waitTime":5,"paidPrice":null},{"name":"Vista Trail at Camp Discovery","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"TRON Realm, Chevrolet Digital Challenge","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Explorer Canoes","status":"REFURBISHMENT","waitTime":null,"paidPrice":null},{"name":"Marvel Universe","status":"CLOSED","waitTime":null,"paidPrice":null}],"shows":[{"name":"Tai Chi with Character","status":"CLOSED","showtimes":[]},{"name":"Frozen: A Sing-Along Celebration","status":"CLOSED","showtimes":[]},{"name":"Avengers Training Initiative","status":"CLOSED","showtimes":[]},{"name":"Meet Minnie Mouse and Friends on Fantasyland","status":"CLOSED","showtimes":[]},{"name":"Eye of the Storm: Captain Jack’s Stunt Spectacular","status":"CLOSED","showtimes":[]},{"name":"Meet LinaBell at Friendship Point","status":"CLOSED","showtimes":[]},{"name":"Disney Zootopia Comes Alive","status":"CLOSED","showtimes":[]},{"name":"The Heart of Magic","status":"CLOSED","showtimes":[]},{"name":"Meet the Character from UP at Happy Circle","status":"CLOSED","showtimes":[]},{"name":"Fantasy Storytelling","status":"CLOSED","showtimes":[]},{"name":"★Spook-tacular★ Disney Villains Castle Celebration","status":"CLOSED","showtimes":[]},{"name":"Meet Goofy and Friends on Mickey Avenue","status":"CLOSED","showtimes":[]},{"name":"Fantasy Festival","status":"CLOSED","showtimes":[]},{"name":"ILLUMINATE! A Nighttime Celebration","status":"CLOSED","showtimes":[]},{"name":"Mickey’s Storybook Adventure","status":"CLOSED","showtimes":[]},{"name":"Meet Donald and Friends on Fantasyland","status":"CLOSED","showtimes":[]},{"name":"Meet Pete on Mickey Avenue","status":"CLOSED","showtimes":[]},{"name":"Meet Pixar Characters at Tomorrowland","status":"CLOSED","showtimes":[]},{"name":"Meet Judy & Nick at Zootopia Police Department Recruitment Center","status":"CLOSED","showtimes":[]},{"name":"Heroic Encounter at the Marvel Universe","status":"CLOSED","showtimes":[]},{"name":"The JAMMitors","status":"CLOSED","showtimes":[]},{"name":"Shanghai Disneyland Band","status":"CLOSED","showtimes":[]},{"name":"★Spook-tacular★ Meet Lotso at The Meeting Post","status":"CLOSED","showtimes":[]},{"name":"Meet Mickey at the Gardens of Imagination","status":"CLOSED","showtimes":[]},{"name":"Mickey’s Storybook Express","status":"CLOSED","showtimes":[]},{"name":"Voodoo Alley Fight","status":"CLOSED","showtimes":[]},{"name":"A Pirate’s Life for You!","status":"CLOSED","showtimes":[]},{"name":"★Spook-tacular★ Fantasyland - Meet & Greet with Jack & Sally","status":"CLOSED","showtimes":[]},{"name":"Meet a friend from the Hundred Acre Wood","status":"CLOSED","showtimes":[]},{"name":"Traveling Troubadours","status":"CLOSED","showtimes":[]},{"name":"Meet your Favorite Toys at The Meeting Post","status":"CLOSED","showtimes":[]},{"name":"Meet the Friends from Lilo & Stitch at Galaxy Gathering","status":"CLOSED","showtimes":[]},{"name":"Donald’s Halloween Treat Cavalcade","status":"CLOSED","showtimes":[]},{"name":"★Spook-tacular★ Meet Loki at the Marvel Universe","status":"CLOSED","showtimes":[]},{"name":"Avengers’ Patrol","status":"CLOSED","showtimes":[]},{"name":"Catch a Glimpse of Kevin","status":"CLOSED","showtimes":[]},{"name":"Meet Evil Witch at Seven Dwarfs Mine Train","status":"CLOSED","showtimes":[]},{"name":"Meet Spider-Man at the Marvel Universe","status":"CLOSED","showtimes":[]},{"name":"Meet Duffy and Friends on Mickey Avenue","status":"CLOSED","showtimes":[]},{"name":"Meet Jack Sparrow at the Sparrow’s Nest","status":"CLOSED","showtimes":[]},{"name":"Toy Soldiers Bucket O' Fun","status":"CLOSED","showtimes":[]},{"name":"Treasure Cove: Buccaneer Bash","status":"CLOSED","showtimes":[]},{"name":"Meet Disney Royalty at Enchanted Storybook Castle","status":"CLOSED","showtimes":[]},{"name":"FriendSHIP! Duffy and Friends’ Special Pre-Parade","status":"CLOSED","showtimes":[]},{"name":"★Spook-tacular★ Donald’s Mischievous Treat Party!","status":"CLOSED","showtimes":[]},{"name":"Villain Balcony Walk","status":"CLOSED","showtimes":[]},{"name":"Club Destin-E","status":"CLOSED","showtimes":[]},{"name":"Swabbie Fight","status":"CLOSED","showtimes":[]},{"name":"★Spook-tacular★ Alice in Wonderland Maze Character Encounters","status":"CLOSED","showtimes":[]},{"name":"Meet Disney Villains at Enchanted Storybook Castle","status":"CLOSED","showtimes":[]},{"name":"Pirates Roaming","status":"CLOSED","showtimes":[]}]},{"id":"bd0eb47b-2f02-4d4d-90fa-cb3a68988e3b","name":"Hong Kong Disneyland Park","resort":"Hong Kong Disneyland","country":"Hongkong 🇭🇰","timezone":"Asia/Hong_Kong","sha256":"20eb0cd10d75f416fc613b9d7858862469aa2d19319325691568f201d27482dc","totalAttractions":44,"openAttractions":0,"totalShows":73,"attractions":[{"name":"Toy Soldier Parachute Drop","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Iron Man Tech Showcase - Presented by Stark Industries","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Tarzan's Treehouse","status":"REFURBISHMENT","waitTime":null,"paidPrice":null},{"name":"Mickey's PhilharMagic","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Mad Hatter Tea Cups","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Meet StellaLou at Duffy and Friends Play House","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Hyperspace Mountain","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Wandering Oaken’s Sliding Sleighs","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Barrel of Fun","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"The Many Adventures of Winnie the Pooh","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Mystic Point Freight Depot","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Big Grizzly Mountain Runaway Mine Cars","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Orbitron","status":"REFURBISHMENT","waitTime":null,"paidPrice":null},{"name":"Meet LinaBell at Duffy and Friends Play House","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Meet ShellieMay at Duffy and Friends Play House","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Slinky Dog Spin","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"\"it's a small world\"","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"The Royal Reception Hall","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Fantasy Gardens","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Geyser Gulch","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Rafts to Tarzan's Treehouse","status":"REFURBISHMENT","waitTime":null,"paidPrice":null},{"name":"Playhouse in the Woods","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Garden of Wonders","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Dumbo the Flying Elephant","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Ant-Man and The Wasp: Nano Battle!","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Hong Kong Disneyland Railroad - Main Street Station","status":"REFURBISHMENT","waitTime":null,"paidPrice":null},{"name":"Animation Academy","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Frozen Ever After – Presented by Blue Cross","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Meet ‘Olu Mel at Duffy and Friends Play House","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Iron Man Experience - Presented by AIA","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Cinderella Carousel","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Wild West Photo Fun","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Jungle River Cruise","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Meet CookieAnn at Duffy and Friends Play House","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Meet Duffy at Duffy and Friends Play House","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"RC Racer","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Meet Gelatoni at Duffy and Friends Play House","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Hong Kong Disneyland Railroad – Fantasyland Station","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Duffy and Friends Play House","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Castle of Magical Dreams","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Liki Tikis","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Fairy Tale Forest","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Main Street Vehicles","status":"CLOSED","waitTime":null,"paidPrice":null},{"name":"Mystic Manor","status":"CLOSED","waitTime":null,"paidPrice":null}],"shows":[{"name":"Heroic Encounter with Spider-Man at the Tomorrowland Station","status":"OPERATING","showtimes":["12:00","13:00","14:00","16:00","17:00","18:00"]},{"name":"Heroic Encounter with Captain America at the Tomorrowland Station","status":"OPERATING","showtimes":["12:30","13:30","14:30","16:30","17:30","18:30"]},{"name":"Meet Woody at Barrel of Fun","status":"OPERATING","showtimes":["11:50","12:50","13:50","15:50","16:50","17:50"]},{"name":"Draw & Meet with Minnie Mouse at Animation Academy","status":"OPERATING","showtimes":["11:00","12:30","14:30","15:30","16:30","17:30"]},{"name":"Mickey and the Wondrous Book","status":"OPERATING","showtimes":["11:15","12:30","13:45","16:30","17:45","19:00"]},{"name":"Meet Jessie at Barrel of Fun","status":"OPERATING","showtimes":["11:30","12:30","13:30","15:30","16:30","17:30"]},{"name":"Meet Lotso at Toy Story Land","status":"OPERATING","showtimes":["12:10","13:10","14:10","16:10","17:10","18:10"]},{"name":"Draw & Meet with Goofy at Animation Academy","status":"OPERATING","showtimes":["10:30","11:30","13:30","15:00","17:00"]},{"name":"Draw & Meet with Pluto at Animation Academy","status":"OPERATING","showtimes":["12:00","13:00","14:00","16:00","18:00"]},{"name":"Let’s Get Wicked","status":"OPERATING","showtimes":["15:15","17:00","19:15","21:00"]},{"name":"Moana: A Homecoming Celebration","status":"OPERATING","showtimes":["13:15","14:40","16:30","18:20"]},{"name":"Mickey’s Happy Halloween Adventure","status":"OPERATING","showtimes":["12:45","14:15","17:00","18:45"]},{"name":"Uninvited! A Villains Takeover Party","status":"OPERATING","showtimes":["15:00","17:45","19:30"]},{"name":"Meet Nick and Judy in Adventureland","status":"OPERATING","showtimes":["11:00","15:00"]},{"name":"Meet Winnie the Pooh and Friends at Halloween Time Festival Gardens","status":"OPERATING","showtimes":["12:30","16:30"]},{"name":"Get into Gaston and Belle’s Story","status":"OPERATING","showtimes":["12:35"]},{"name":"Meet Princesses & Queens at The Royal Reception Hall","status":"OPERATING","showtimes":["10:30"]},{"name":"Get into Maleficent and Aurora’s Story","status":"OPERATING","showtimes":["12:45"]},{"name":"Wickedly Fun Trick-or-Treating at Mystic Point","status":"OPERATING","showtimes":["13:45"]},{"name":"Meet Halloween Disney PUSH in the Park","status":"OPERATING","showtimes":["11:30"]},{"name":"The Royal Arendellian Troubadours","status":"OPERATING","showtimes":["11:15"]},{"name":"Meet LinaBell at Duffy and Friends Play House","status":"OPERATING","showtimes":["10:45"]},{"name":"Get into Loki and Thor’s Story","status":"OPERATING","showtimes":["12:00"]},{"name":"Meet ShellieMay at Duffy and Friends Play House","status":"OPERATING","showtimes":["10:45"]},{"name":"Wickedly Fun Trick-or-Treating at Tomorrowland","status":"OPERATING","showtimes":["13:45"]},{"name":"Atmosphere Entertainment at Adventureland","status":"OPERATING","showtimes":["11:45"]},{"name":"Nuts for Nuggets","status":"OPERATING","showtimes":["13:25"]},{"name":"Meet Albert and Charlotte","status":"OPERATING","showtimes":["12:50"]},{"name":"Meet Gelatoni at Duffy and Friends Play House","status":"OPERATING","showtimes":["10:45"]},{"name":"Heroic Encounter with Iron Man at the Iron Man Tech Showcase","status":"OPERATING","showtimes":["11:00"]},{"name":"Get into The Queen and Snow White’s Story","status":"OPERATING","showtimes":["12:10"]},{"name":"Wickedly Fun Trick-or-Treating at Toy Story Land","status":"OPERATING","showtimes":["13:45"]},{"name":"Playhouse in the Woods","status":"OPERATING","showtimes":["11:30"]},{"name":"“Momentous” Nighttime Spectacular","status":"OPERATING","showtimes":["22:30"]},{"name":"Wickedly Fun Trick-or-Treating in Fantasy Gardens","status":"OPERATING","showtimes":["13:45"]},{"name":"The Royal Arendellian Conjuror","status":"OPERATING","showtimes":["10:45"]},{"name":"Heroic Encounter with Doctor Strange at the Tomorrowland Station","status":"CLOSED","showtimes":[]},{"name":"Heroic Encounter with Black Widow at the Tomorrowland Station","status":"CLOSED","showtimes":[]},{"name":"Meet Scarlet Witch at the Tomorrowland Station","status":"CLOSED","showtimes":[]},{"name":"Meet Bo Peep at Barrel of Fun","status":"CLOSED","showtimes":[]},{"name":"Meet Queen Anna at World of Frozen","status":"CLOSED","showtimes":[]},{"name":"Meet Oaken at World of Frozen","status":"CLOSED","showtimes":[]},{"name":"Get into Lady Tremaine and her daughters' Story","status":"CLOSED","showtimes":[]},{"name":"Meet Disney Friends at Adventureland","status":"CLOSED","showtimes":[]},{"name":"Meet ‘Olu Mel at Duffy and Friends Play House","status":"CLOSED","showtimes":[]},{"name":"Meet and Greet with Mickey and pals at Town Square Gazebo and Main Street U.S.A","status":"CLOSED","showtimes":[]},{"name":"Meet Princesses & Queens at the Castle Aisle","status":"CLOSED","showtimes":[]},{"name":"Cruella De Vil Unleashed! at Main Street U.S.A","status":"CLOSED","showtimes":[]},{"name":"Meet StellaLou at Duffy and Friends Play House","status":"CLOSED","showtimes":[]},{"name":"Meet Loki at Tomorrowland Station","status":"CLOSED","showtimes":[]},{"name":"Festival of The Lion King","status":"CLOSED","showtimes":[]},{"name":"Wickedly Fun Trick-or-Treating at Fantasyland","status":"CLOSED","showtimes":[]},{"name":"Meet Nick and Judy at Karibuni Marketplace","status":"CLOSED","showtimes":[]},{"name":"Get into Jafar and Jasmine’s Story","status":"CLOSED","showtimes":[]},{"name":"Meet Moana at Adventureland","status":"CLOSED","showtimes":[]},{"name":"Meet Lord Henry Mystic","status":"CLOSED","showtimes":[]},{"name":"Draw & Meet with Mickey Mouse at Animation Academy","status":"CLOSED","showtimes":[]},{"name":"“Friendtastic!” Parade","status":"CLOSED","showtimes":[]},{"name":"Meet Tinker Bell at Fairy Tale Forest","status":"CLOSED","showtimes":[]},{"name":"Get into Queen of Hearts and Alice’s Story","status":"CLOSED","showtimes":[]},{"name":"Heroic Encounter with Gamora at the Tomorrowland Station","status":"CLOSED","showtimes":[]},{"name":"Heroic Encounter with Captain Marvel at the Tomorrowland Station","status":"CLOSED","showtimes":[]},{"name":"Toy Soldier Boot Camp","status":"CLOSED","showtimes":[]},{"name":"Meet Kristoff at World of Frozen","status":"CLOSED","showtimes":[]},{"name":"Embark on Epic Daytime Missions","status":"CLOSED","showtimes":[]},{"name":"Meet Elsa at World of Frozen","status":"CLOSED","showtimes":[]},{"name":"Meet Pocahontas at Adventureland","status":"CLOSED","showtimes":[]},{"name":"Meet Lady Tremaine, Anastasia and Drizella","status":"CLOSED","showtimes":[]},{"name":"Heroic Encounter with Thor at the Tomorrowland Station","status":"CLOSED","showtimes":[]},{"name":"Meet Buzz Lightyear at Barrel of Fun","status":"CLOSED","showtimes":[]},{"name":"Heroic Encounter with Black Panther at the Tomorrowland Station","status":"CLOSED","showtimes":[]},{"name":"Meet Duffy at Duffy and Friends Play House","status":"CLOSED","showtimes":[]},{"name":"Meet CookieAnn at Duffy and Friends Play House","status":"CLOSED","showtimes":[]}]}]};
+    // Preserve snapshot wait times so if a park closes late at night, we can still show its last measured daytime wait time!
+    DATA.parks.forEach(p => {
+      p.attractions.forEach(a => {
+        a.snapshotWait = a.waitTime;
+      });
+    });
+
     let currentParkIdx = 0;
-    let currentTab = 'all';
-    let selectedSeasonMode = 'auto'; // 'auto' or specific season key
+    let currentTab = 'rides'; // Default directly to Attractions & Wait Times!
+    let currentRideFilter = 'all';
+    let selectedSeasonMode = 'auto';
     let favorites = [];
     try {
       favorites = JSON.parse(localStorage.getItem('disney_rea_favs') || '[]');
@@ -542,7 +637,7 @@
         desc: 'Mystieke pompoenen op Main Street, Disney Villains, Haunted Mansion & Phantom Manor sfeer!',
         themeColor: '#1f1130',
         particles: ['🎃', '🦇', '🍂', '👻', '✨', '🕯️'],
-        keywords: ['haunted', 'phantom', 'halloween', 'villain', 'nightmare', 'tower of terror', 'ghost', 'spooky', 'pirates', 'mystic']
+        keywords: ['haunted', 'phantom', 'halloween', 'villain', 'nightmare', 'tower of terror', 'ghost', 'spooky', 'pirates', 'mystic', 'big thunder', 'indiana']
       },
       christmas: {
         key: 'christmas',
@@ -553,7 +648,7 @@
         desc: 'Sneeuw op Main Street, reusachtige kerstbomen, Mickey’s Dazzling Christmas Parade & wintermagie!',
         themeColor: '#0f2922',
         particles: ['❄️', '🎄', '⭐', '🦌', '🔔', '🎁'],
-        keywords: ['christmas', 'holiday', 'jingle', 'frozen', 'winter', 'snow', 'santa', 'believe', 'small world', 'parade', 'choir']
+        keywords: ['christmas', 'holiday', 'jingle', 'frozen', 'winter', 'snow', 'santa', 'believe', 'small world', 'parade', 'peter pan', 'pinocchio', 'sleigh']
       },
       newyear: {
         key: 'newyear',
@@ -564,7 +659,7 @@
         desc: 'Champagne-goud, middernachtelijk vuurwerk boven het kasteel & feestelijke shows!',
         themeColor: '#131c2e',
         particles: ['🎆', '✨', '🥂', '🌟', '🎇', '🏰'],
-        keywords: ['firework', 'illuminate', 'momentous', 'fantasmic', 'world of color', 'parade', 'celebration', 'dreams', 'sky']
+        keywords: ['firework', 'illuminate', 'momentous', 'fantasmic', 'world of color', 'parade', 'celebration', 'dreams', 'hyperspace', 'space mountain']
       },
       spring: {
         key: 'spring',
@@ -575,7 +670,7 @@
         desc: 'Kleurrijke bloementuinen, vrolijke muzikale parades & frisse lentekleuren in de parken!',
         themeColor: '#291426',
         particles: ['🌸', '🦋', '🌷', '✨', '🌿', '🌺'],
-        keywords: ['garden', 'flower', 'alice', 'tinker bell', 'peter pan', 'fairy', 'wondrous', 'beauty', 'storybook', 'parade']
+        keywords: ['garden', 'flower', 'alice', 'tinker bell', 'peter pan', 'fairy', 'wondrous', 'beauty', 'storybook', 'parade', 'dumbo']
       },
       summer: {
         key: 'summer',
@@ -586,7 +681,7 @@
         desc: 'Zonnige parkdagen, verfrissende waterattracties, Lion King & zomerse avondshows!',
         themeColor: '#0e2d38',
         particles: ['☀️', '🌴', '🌊', '🌺', '🍦', '✨'],
-        keywords: ['splash', 'pirates', 'moana', 'lion king', 'nemo', 'jungle', 'roaring', 'kali', 'grizzly', 'parade']
+        keywords: ['splash', 'pirates', 'moana', 'lion king', 'nemo', 'jungle', 'roaring', 'kali', 'grizzly', 'parade', 'autopia']
       },
       classic: {
         key: 'classic',
@@ -597,33 +692,18 @@
         desc: 'Het klassieke koninklijke Disney-thema met sterrenstof boven het Doornroosje Kasteel.',
         themeColor: '#151c36',
         particles: ['✨', '🏰', '🌟', '👑', '🎭', '🎵'],
-        keywords: ['castle', 'mickey', 'philharmagic', 'musical', 'parade', 'fantasmic']
+        keywords: ['castle', 'mickey', 'philharmagic', 'musical', 'parade', 'fantasmic', 'peter pan', 'big thunder']
       }
     };
 
     function detectDisneySeasonByDate(d = new Date()) {
-      const m = d.getMonth() + 1; // 1..12
+      const m = d.getMonth() + 1;
       const day = d.getDate();
-      // 1 sept t/m 4 nov -> Halloween
-      if ((m === 9) || (m === 10) || (m === 11 && day <= 4)) {
-        return 'halloween';
-      }
-      // 5 nov t/m 30 dec -> Kerst (Enchanted Christmas)
-      if ((m === 11 && day >= 5) || (m === 12 && day <= 30)) {
-        return 'christmas';
-      }
-      // 31 dec t/m 6 jan -> Oud & Nieuw
-      if ((m === 12 && day === 31) || (m === 1 && day <= 6)) {
-        return 'newyear';
-      }
-      // 1 mrt t/m 31 mei -> Lente
-      if (m >= 3 && m <= 5) {
-        return 'spring';
-      }
-      // 1 jun t/m 31 aug -> Zomer
-      if (m >= 6 && m <= 8) {
-        return 'summer';
-      }
+      if ((m === 9) || (m === 10) || (m === 11 && day <= 4)) return 'halloween';
+      if ((m === 11 && day >= 5) || (m === 12 && day <= 30)) return 'christmas';
+      if ((m === 12 && day === 31) || (m === 1 && day <= 6)) return 'newyear';
+      if (m >= 3 && m <= 5) return 'spring';
+      if (m >= 6 && m <= 8) return 'summer';
       return 'classic';
     }
 
@@ -631,7 +711,7 @@
       const m = d.getMonth() + 1;
       const day = d.getDate();
       if (activeKey === 'halloween' && (m === 10 || (m === 11 && day <= 4))) {
-        const xmasStart = new Date(d.getFullYear(), 10, 5); // Nov 5
+        const xmasStart = new Date(d.getFullYear(), 10, 5);
         const diffDays = Math.max(1, Math.ceil((xmasStart - d) / (1000 * 60 * 60 * 24)));
         return '🎄 Kerstseizoen over ' + diffDays + (diffDays === 1 ? ' dag!' : ' dagen!');
       }
@@ -644,9 +724,7 @@
     }
 
     function getActiveSeasonKey() {
-      if (selectedSeasonMode === 'auto') {
-        return detectDisneySeasonByDate(new Date());
-      }
+      if (selectedSeasonMode === 'auto') return detectDisneySeasonByDate(new Date());
       return SEASONS[selectedSeasonMode] ? selectedSeasonMode : detectDisneySeasonByDate(new Date());
     }
 
@@ -667,13 +745,11 @@
       if (metaTheme) metaTheme.setAttribute('content', s.themeColor);
 
       document.getElementById('app-main-title').textContent = s.icon + ' Disney World & Musicals';
-      document.getElementById('nav-park-ico').textContent = s.icon;
       document.getElementById('season-badge').textContent = s.badge;
       document.getElementById('season-title').textContent = s.title;
       document.getElementById('season-desc').textContent = s.desc;
       document.getElementById('season-countdown').textContent = getCountdownHint(new Date(), activeKey);
 
-      // Render decorative floating seasonal emojis inside banner
       const pBox = document.getElementById('season-particles');
       const positions = [
         { top: '10%', left: '72%', delay: '0s' },
@@ -685,7 +761,6 @@
         `<span class="particle" style="top:${pos.top};left:${pos.left};animation-delay:${pos.delay};">${s.particles[idx % s.particles.length]}</span>`
       ).join('');
 
-      // Render season switcher pills
       const bar = document.getElementById('season-bar');
       const autoSeasonObj = SEASONS[autoKey];
       const modes = [
@@ -704,9 +779,6 @@
       `).join('');
     }
 
-    if (window.navigator.standalone === true) {
-      document.getElementById('install-hint').style.display = 'none';
-    }
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js').catch(() => {});
     }
@@ -728,6 +800,10 @@
       return s.keywords.some(w => l.includes(w));
     }
 
+    function getEffectiveWait(a) {
+      return a.waitTime !== null && a.waitTime !== undefined ? a.waitTime : (a.snapshotWait ?? null);
+    }
+
     function saveFavs() {
       try { localStorage.setItem('disney_rea_favs', JSON.stringify(favorites)); } catch (_) {}
       document.getElementById('fav-count').textContent = String(favorites.length);
@@ -743,127 +819,271 @@
       renderPlanner();
     }
 
+    function setRideFilter(flt) {
+      currentRideFilter = flt;
+      ['all', 'open', 'short', 'top', 'season'].forEach(k => {
+        const el = document.getElementById('flt-' + k);
+        if (el) el.className = 'filter-pill' + (k === flt ? ' active' : '');
+      });
+      renderList();
+    }
+
     function selectPark(idx) {
       currentParkIdx = idx;
       renderParksBar();
       renderStats();
       renderList();
+      // Immediately fetch live wait times for the selected park!
+      refreshCurrentParkLive(false);
     }
 
     function setTab(tab) {
       currentTab = tab;
-      ['all', 'musicals', 'planner', 'rea'].forEach(t => {
-        document.getElementById('nav-' + t).className = 'tab-item' + (t === tab ? ' active' : '');
+      ['rides', 'musicals', 'world', 'planner'].forEach(t => {
+        const el = document.getElementById('nav-' + t);
+        if (el) el.className = 'tab-item' + (t === tab ? ' active' : '');
       });
-      document.getElementById('main-explore').style.display = (tab === 'all' || tab === 'musicals') ? 'block' : 'none';
+      document.getElementById('main-explore').style.display = (tab === 'rides' || tab === 'musicals') ? 'block' : 'none';
+      document.getElementById('ride-filters').style.display = (tab === 'rides') ? 'flex' : 'none';
+      document.getElementById('main-world').style.display = tab === 'world' ? 'block' : 'none';
       document.getElementById('main-planner').style.display = tab === 'planner' ? 'block' : 'none';
-      document.getElementById('main-rea').style.display = tab === 'rea' ? 'block' : 'none';
-      if (tab === 'all' || tab === 'musicals') renderList();
+      if (tab === 'rides' || tab === 'musicals') renderList();
+      if (tab === 'world') renderWorldOverview();
       if (tab === 'planner') renderPlanner();
     }
 
-    async function refreshCurrentParkLive() {
+    async function refreshCurrentParkLive(manual = false) {
       const p = DATA.parks[currentParkIdx];
       const statusEl = document.getElementById('status-line');
-      statusEl.textContent = 'Bezig met live ophalen voor ' + p.name + '...';
+      if (manual) {
+        statusEl.textContent = '🔄 Live wachttijden ophalen voor ' + p.name + '...';
+      }
       try {
         const res = await fetch('https://api.themeparks.wiki/v1/entity/' + p.id + '/live');
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const body = await res.json();
         const live = body.liveData || [];
-        p.attractions = live.filter(x => x.entityType === 'ATTRACTION').map(a => ({
-          name: a.name,
-          status: a.status,
-          waitTime: a.queue?.STANDBY?.waitTime ?? null,
-          paidPrice: a.queue?.PAID_RETURN_TIME?.price?.formatted ?? null
-        })).sort((a, b) => (b.waitTime ?? -1) - (a.waitTime ?? -1));
+
+        // Keep snapshot wait times in a map so if a park is closed at night we still have daytime reference waits
+        const prevSnapMap = {};
+        for (const oldA of p.attractions) {
+          prevSnapMap[oldA.name] = oldA.snapshotWait ?? oldA.waitTime ?? null;
+        }
+
+        p.attractions = live.filter(x => x.entityType === 'ATTRACTION').map(a => {
+          const liveW = a.queue?.STANDBY?.waitTime ?? null;
+          const snapW = prevSnapMap[a.name] ?? null;
+          return {
+            name: a.name,
+            status: a.status,
+            waitTime: liveW,
+            snapshotWait: liveW !== null ? liveW : snapW,
+            paidPrice: a.queue?.PAID_RETURN_TIME?.price?.formatted ?? null
+          };
+        }).sort((a, b) => {
+          const wa = getEffectiveWait(a) ?? (a.status === 'OPERATING' ? 0 : -1);
+          const wb = getEffectiveWait(b) ?? (b.status === 'OPERATING' ? 0 : -1);
+          return wb - wa;
+        });
+
         p.shows = live.filter(x => x.entityType === 'SHOW').map(s => ({
           name: s.name,
           status: s.status,
           showtimes: (s.showtimes || []).map(t => t.startTime ? t.startTime.slice(11, 16) : '').filter(Boolean)
         })).sort((a, b) => b.showtimes.length - a.showtimes.length);
+
         p.totalAttractions = p.attractions.length;
         p.openAttractions = p.attractions.filter(a => a.status === 'OPERATING').length;
         p.totalShows = p.shows.length;
-        const now = new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        statusEl.textContent = '✅ Live ververst om ' + now + ' (' + p.name + ')';
+
+        const now = new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+        statusEl.textContent = '🟢 Live wachttijden bijgewerkt om ' + now + ' (' + p.name + ')';
+        renderParksBar();
         renderStats();
         renderList();
+        if (currentTab === 'world') renderWorldOverview();
       } catch (e) {
-        statusEl.textContent = 'Offline modus (REA Snapshot actief)';
+        statusEl.textContent = '⚡ REA Wachttijden Snapshot actief (' + p.name + ')';
       }
     }
 
     function renderParksBar() {
       const bar = document.getElementById('parks-bar');
-      bar.innerHTML = DATA.parks.map((p, i) => `
-        <button class="park-pill ${i === currentParkIdx ? 'active' : ''}" onclick="selectPark(${i})">
-          <div class="country">${p.country}</div>
-          <div class="pname">${p.name}</div>
-        </button>
-      `).join('');
+      bar.innerHTML = DATA.parks.map((p, i) => {
+        const waits = p.attractions.map(a => getEffectiveWait(a)).filter(w => w !== null);
+        const maxW = waits.length ? Math.max(...waits) : null;
+        const waitSummary = maxW !== null
+          ? ('⏱️ Piek: ' + maxW + ' min • ' + p.openAttractions + ' open')
+          : ('🎢 ' + p.totalAttractions + ' attracties');
+        return `
+          <button class="park-pill ${i === currentParkIdx ? 'active' : ''}" onclick="selectPark(${i})">
+            <div class="country"><span>${p.country}</span></div>
+            <div class="pname">${p.name}</div>
+            <div class="pwait">${waitSummary}</div>
+          </button>
+        `;
+      }).join('');
     }
 
     function renderStats() {
       const p = DATA.parks[currentParkIdx];
+      const waits = p.attractions.map(a => getEffectiveWait(a)).filter(w => w !== null);
+      const maxW = waits.length ? Math.max(...waits) : null;
+      const avgW = waits.length ? Math.round(waits.reduce((s, v) => s + v, 0) / waits.length) : null;
+
       document.getElementById('st-open').textContent = p.openAttractions + '/' + p.totalAttractions;
+      document.getElementById('st-avg').textContent = avgW !== null ? (avgW + ' min') : '-';
+      document.getElementById('st-max').textContent = maxW !== null ? (maxW + ' min') : '-';
       document.getElementById('st-shows').textContent = String(p.totalShows);
-      const top = p.attractions.find(a => a.waitTime !== null);
-      document.getElementById('st-max').textContent = top ? top.waitTime + 'm' : 'Nacht';
     }
 
     function renderList() {
       const p = DATA.parks[currentParkIdx];
       const q = (document.getElementById('search-box').value || '').toLowerCase().trim();
       const activeSeason = SEASONS[getActiveSeasonKey()] || SEASONS.classic;
-      const rows = [];
-
-      for (const s of p.shows) {
-        if (q && !s.name.toLowerCase().includes(q)) continue;
-        rows.push({
-          kind: 'show',
-          name: s.name,
-          musical: isMusical(s.name),
-          seasonal: isSeasonalHighlight(s.name),
-          sub: s.showtimes.length ? '🕒 ' + s.showtimes.slice(0, 6).join(' • ') : 'Geen resterende shows vandaag',
-          pill: s.showtimes.length + 'x',
-          open: s.showtimes.length > 0
-        });
-      }
-      if (currentTab !== 'musicals') {
-        for (const a of p.attractions) {
-          if (q && !a.name.toLowerCase().includes(q)) continue;
-          rows.push({
-            kind: 'ride',
-            name: a.name,
-            musical: isMusical(a.name),
-            seasonal: isSeasonalHighlight(a.name),
-            sub: a.paidPrice ? '⚡ Premier/Lightning: ' + a.paidPrice : 'Standby wachtrij • ' + a.status,
-            pill: a.waitTime !== null ? a.waitTime + ' min' : (a.status === 'OPERATING' ? 'Open' : 'Gesloten'),
-            open: a.status === 'OPERATING'
-          });
-        }
-      }
-
       const container = document.getElementById('items-container');
-      container.innerHTML = rows.map(r => {
-        const key = p.name + '::' + r.name;
+
+      if (currentTab === 'rides') {
+        let list = p.attractions.filter(a => !q || a.name.toLowerCase().includes(q));
+        if (currentRideFilter === 'open') {
+          list = list.filter(a => a.status === 'OPERATING' || getEffectiveWait(a) !== null);
+        } else if (currentRideFilter === 'short') {
+          list = list.filter(a => {
+            const w = getEffectiveWait(a);
+            return w !== null && w <= 20;
+          });
+        } else if (currentRideFilter === 'top') {
+          list = list.filter(a => {
+            const w = getEffectiveWait(a);
+            return w !== null && w >= 35;
+          });
+        } else if (currentRideFilter === 'season') {
+          list = list.filter(a => isSeasonalHighlight(a.name));
+        }
+
+        // Sort by effective wait time descending, then OPERATING first
+        list = [...list].sort((a, b) => {
+          const wa = getEffectiveWait(a) ?? (a.status === 'OPERATING' ? 0 : -1);
+          const wb = getEffectiveWait(b) ?? (b.status === 'OPERATING' ? 0 : -1);
+          return wb - wa;
+        });
+
+        document.getElementById('list-title').textContent = '🎢 Attracties & Wachttijden (' + p.name + ')';
+        document.getElementById('list-count').textContent = list.length + ' attracties';
+
+        if (list.length === 0) {
+          container.innerHTML = '<div class="item-card"><p class="item-sub">Geen attracties gevonden voor dit filter. Tik op <strong>🎢 Alle Attracties</strong>.</p></div>';
+          return;
+        }
+
+        container.innerHTML = list.map(a => {
+          const key = p.name + '::' + a.name;
+          const saved = favorites.some(f => f.key === key);
+          const safeName = a.name.replace(/'/g, "\\'");
+          const safePark = p.name.replace(/'/g, "\\'");
+          const seasonal = isSeasonalHighlight(a.name);
+          const musical = isMusical(a.name);
+
+          const liveW = a.waitTime;
+          const effW = getEffectiveWait(a);
+          const isOpen = a.status === 'OPERATING';
+
+          let boxClass = '';
+          let numText = '-';
+          let unitText = 'Gesloten';
+          let barColor = '#64748b';
+          let barPct = 0;
+
+          if (effW !== null) {
+            numText = String(effW);
+            unitText = liveW !== null ? 'min live' : 'min (laatst)';
+            barPct = Math.min(100, Math.max(8, Math.round((effW / 90) * 100)));
+            if (effW <= 20) {
+              boxClass = 'short';
+              barColor = 'var(--green)';
+            } else if (effW <= 45) {
+              boxClass = 'medium';
+              barColor = 'var(--gold)';
+            } else {
+              boxClass = 'long';
+              barColor = 'var(--red)';
+            }
+          } else if (isOpen) {
+            numText = 'Open';
+            unitText = 'Doorlopen';
+            boxClass = 'short';
+            barPct = 10;
+            barColor = 'var(--green)';
+          }
+
+          const subParts = [];
+          if (liveW !== null) subParts.push('🟢 Actuele wachtrij');
+          else if (effW !== null && !isOpen) subParts.push('🌙 Park nu gesloten • Laatst gemeten wachtrij: ' + effW + ' min');
+          else if (isOpen) subParts.push('🟢 Nu geopend (geen wachtrij)');
+          else subParts.push('🔴 Momenteel gesloten');
+
+          if (a.paidPrice) subParts.push('⚡ Premier Access / Lightning Lane: ' + a.paidPrice);
+
+          const detailForPlan = effW !== null ? (effW + ' min wachttijd') : (isOpen ? 'Open' : 'Gesloten');
+
+          return `
+            <div class="item-card ${seasonal ? 'seasonal-highlight' : ''}">
+              <div class="item-info">
+                <span class="badge ${musical ? 'musical' : ''}">
+                  ${musical ? '🎵 Muzikale Attractie' : '🎢 Attractie'}
+                </span>
+                ${seasonal ? `<span class="badge seasonal">${activeSeason.icon} ${activeSeason.shortLabel}-tip</span>` : ''}
+                <h3 class="item-title">${a.name}</h3>
+                <p class="item-sub">${subParts.join(' • ')}</p>
+                ${effW !== null ? `
+                  <div class="wait-bar-track">
+                    <div class="wait-bar-fill" style="width:${barPct}%;background:${barColor};"></div>
+                  </div>
+                ` : ''}
+              </div>
+              <div class="right-col">
+                <div class="wait-box ${boxClass}">
+                  <span class="num">${numText}</span>
+                  <span class="unit">${unitText}</span>
+                </div>
+                <button class="fav-btn ${saved ? 'saved' : ''}" onclick="toggleFav('${safePark}', '${p.country}', '${safeName}', 'ride', '${detailForPlan}')">
+                  ${saved ? '★ Bewaard' : '+ Dagplan'}
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+        return;
+      }
+
+      // Musicals & Shows Tab
+      const showsList = p.shows.filter(s => !q || s.name.toLowerCase().includes(q));
+      document.getElementById('list-title').textContent = '🎭 Musicals, Parades & Shows (' + p.name + ')';
+      document.getElementById('list-count').textContent = showsList.length + ' shows';
+
+      container.innerHTML = showsList.map(s => {
+        const key = p.name + '::' + s.name;
         const saved = favorites.some(f => f.key === key);
-        const safeName = r.name.replace(/'/g, "\\'");
+        const safeName = s.name.replace(/'/g, "\\'");
         const safePark = p.name.replace(/'/g, "\\'");
+        const seasonal = isSeasonalHighlight(s.name);
+        const hasTimes = s.showtimes && s.showtimes.length > 0;
+        const timeStr = hasTimes ? ('🕒 Showtijden: ' + s.showtimes.slice(0, 8).join(' • ')) : 'Geen resterende showtijden vandaag';
+
         return `
-          <div class="item-card ${r.seasonal ? 'seasonal-highlight' : ''}">
+          <div class="item-card ${seasonal ? 'seasonal-highlight' : ''}">
             <div class="item-info">
-              <span class="badge ${r.musical || r.kind === 'show' ? 'musical' : ''}">
-                ${r.kind === 'show' ? '🎭 Show / Musical' : (r.musical ? '🎵 Muzikale Attractie' : '🎢 Attractie')}
-              </span>
-              ${r.seasonal ? `<span class="badge seasonal">${activeSeason.icon} ${activeSeason.shortLabel}-tip</span>` : ''}
-              <h3 class="item-title">${r.name}</h3>
-              <p class="item-sub">${r.sub}</p>
+              <span class="badge musical">🎭 Show / Musical</span>
+              ${seasonal ? `<span class="badge seasonal">${activeSeason.icon} ${activeSeason.shortLabel}-tip</span>` : ''}
+              <h3 class="item-title">${s.name}</h3>
+              <p class="item-sub">${timeStr}</p>
             </div>
             <div class="right-col">
-              <span class="wait-pill ${r.open ? 'open' : ''}">${r.pill}</span>
-              <button class="fav-btn ${saved ? 'saved' : ''}" onclick="toggleFav('${safePark}', '${p.country}', '${safeName}', '${r.kind}', '${r.pill}')">
+              <div class="wait-box ${hasTimes ? 'short' : ''}">
+                <span class="num">${s.showtimes.length}x</span>
+                <span class="unit">Shows</span>
+              </div>
+              <button class="fav-btn ${saved ? 'saved' : ''}" onclick="toggleFav('${safePark}', '${p.country}', '${safeName}', 'show', '${timeStr}')">
                 ${saved ? '★ Bewaard' : '+ Dagplan'}
               </button>
             </div>
@@ -872,10 +1092,39 @@
       }).join('');
     }
 
+    function renderWorldOverview() {
+      const c = document.getElementById('world-container');
+      c.innerHTML = DATA.parks.map((p, idx) => {
+        const waits = p.attractions.map(a => getEffectiveWait(a)).filter(w => w !== null);
+        const maxW = waits.length ? Math.max(...waits) : null;
+        const avgW = waits.length ? Math.round(waits.reduce((s, v) => s + v, 0) / waits.length) : null;
+        const topRide = p.attractions.find(a => getEffectiveWait(a) !== null);
+        return `
+          <div class="item-card" style="cursor:pointer;" onclick="selectPark(${idx}); setTab('rides');">
+            <div class="item-info">
+              <span class="badge musical">${p.country} • ${p.resort}</span>
+              <h3 class="item-title">${p.name}</h3>
+              <p class="item-sub">
+                🎢 <strong>${p.openAttractions}/${p.totalAttractions}</strong> attracties open • 🎭 <strong>${p.totalShows}</strong> shows
+                ${topRide ? `<br/>🔥 Drukste: <strong>${topRide.name}</strong> (${getEffectiveWait(topRide)} min)` : ''}
+              </p>
+            </div>
+            <div class="right-col">
+              <div class="wait-box ${avgW !== null ? (avgW <= 25 ? 'short' : 'medium') : ''}">
+                <span class="num">${avgW !== null ? (avgW + 'm') : (maxW !== null ? maxW + 'm' : 'Open')}</span>
+                <span class="unit">${avgW !== null ? 'Gem. rij' : 'Bekijk'}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
     function renderPlanner() {
       const c = document.getElementById('planner-container');
+      document.getElementById('planner-sub').textContent = favorites.length + ' bewaard';
       if (favorites.length === 0) {
-        c.innerHTML = '<div class="item-card"><p class="item-sub">Nog geen favorieten! Tik bij een attractie of musical op <strong>+ Dagplan</strong>.</p></div>';
+        c.innerHTML = '<div class="item-card"><p class="item-sub">Nog geen favorieten! Tik bij een attractie of musical op <strong>+ Dagplan</strong> om je eigen route te bewaren.</p></div>';
         return;
       }
       c.innerHTML = favorites.map(f => `
@@ -895,6 +1144,8 @@
     applySeasonTheme();
     saveFavs();
     selectPark(0);
+    // Auto-refresh live wait times every 60 seconds
+    setInterval(() => refreshCurrentParkLive(false), 60000);
   </script>
 </body>
 </html>

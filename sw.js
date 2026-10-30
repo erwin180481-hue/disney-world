@@ -1,4 +1,4 @@
-const CACHE_NAME = 'disney-rea-pwa-v3';
+const CACHE_NAME = 'disney-rea-pwa-v4';
 const ASSETS = ['./', './index.html', './manifest.json', './apple-touch-icon.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
@@ -15,7 +15,6 @@ self.addEventListener('fetch', e => {
   if (e.request.url.includes('api.themeparks.wiki')) {
     return;
   }
-  // Network-first for HTML/navigation so seasonal updates appear immediately
   if (e.request.mode === 'navigate' || e.request.url.endsWith('.html') || e.request.url.endsWith('/')) {
     e.respondWith(
       fetch(e.request).then(res => {
