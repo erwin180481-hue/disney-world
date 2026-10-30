@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="DisneyParken" />
   <meta id="meta-theme-color" name="theme-color" content="#0c7cd5" />
-  <link rel="manifest" href="./manifest.json?v=7" />
+  <link rel="manifest" href="./manifest.json?v=8" />
   <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
   <title>Disney Parken Wereldwijd &amp; D-Tales</title>
   <style>
@@ -29,15 +29,107 @@
     }
 
     body[data-season="halloween"] {
-      --wdw-sky-top: #3b1760;
-      --wdw-sky-mid: #5b2182;
-      --wdw-sky-bot: #24103d;
+      --wdw-blue: #ea580c;
+      --wdw-blue-dark: #9a3412;
+      --wdw-navy: #2e1065;
+      --wdw-sky-top: #2e1065;
+      --wdw-sky-mid: #6b21a8;
+      --wdw-sky-bot: #c2410c;
+      --wdw-bg: #f6f0fb;
     }
 
     body[data-season="christmas"] {
-      --wdw-sky-top: #0f523a;
-      --wdw-sky-mid: #156b4d;
-      --wdw-sky-bot: #0c3b2a;
+      --wdw-blue: #0f766e;
+      --wdw-blue-dark: #115e59;
+      --wdw-navy: #064e3b;
+      --wdw-sky-top: #064e3b;
+      --wdw-sky-mid: #047857;
+      --wdw-sky-bot: #991b1b;
+      --wdw-bg: #eff7f4;
+    }
+
+    body[data-season="newyear"] {
+      --wdw-blue: #b45309;
+      --wdw-blue-dark: #78350f;
+      --wdw-navy: #0f172a;
+      --wdw-sky-top: #090d16;
+      --wdw-sky-mid: #1e293b;
+      --wdw-sky-bot: #854d0e;
+      --wdw-bg: #f1f5f9;
+    }
+
+    body[data-season="spring"] {
+      --wdw-blue: #db2777;
+      --wdw-blue-dark: #9d174d;
+      --wdw-navy: #4a044e;
+      --wdw-sky-top: #be185d;
+      --wdw-sky-mid: #db2777;
+      --wdw-sky-bot: #059669;
+      --wdw-bg: #fdf2f8;
+    }
+
+    body[data-season="summer"] {
+      --wdw-blue: #0284c7;
+      --wdw-blue-dark: #0369a1;
+      --wdw-navy: #0c4a6e;
+      --wdw-sky-top: #0284c7;
+      --wdw-sky-mid: #06b6d4;
+      --wdw-sky-bot: #d97706;
+      --wdw-bg: #f0f9ff;
+    }
+
+    @keyframes floatSeasonParticle {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.78; }
+      50% { transform: translateY(-9px) rotate(10deg); opacity: 1; }
+    }
+
+    .season-particles-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .season-particle {
+      position: absolute;
+      font-size: 20px;
+      animation: floatSeasonParticle 3.6s ease-in-out infinite;
+      user-select: none;
+    }
+
+    .season-pill-scroller {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 4px 2px;
+      position: relative;
+      z-index: 4;
+    }
+    .season-pill-scroller::-webkit-scrollbar { display: none; }
+
+    .season-chip-btn {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      backdrop-filter: blur(4px);
+    }
+
+    .season-chip-btn.active {
+      background: #ffffff;
+      color: var(--wdw-navy);
+      border-color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
     }
 
     * {
@@ -1062,11 +1154,18 @@
        ========================================================= -->
   <div id="screen-home">
     <header class="wdw-hero">
-      <h1 class="wdw-logo-title">Disney Parken Wereldwijd</h1>
-      <p class="wdw-logo-sub">Tik op een Mickey-ballon om een Disney Resort te kiezen</p>
+      <!-- Floating Seasonal Particles (Pumpkins/Bats, Snowflakes, Fireworks, Blossoms, etc.) -->
+      <div id="season-particles-box" class="season-particles-layer"></div>
+
+      <div style="position:relative;z-index:2;">
+        <div id="season-banner-pill" style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,0.28);padding:4px 12px;border-radius:999px;font-size:11px;font-weight:800;margin-bottom:6px;border:1px solid rgba(255,255,255,0.35);color:#ffffff;"></div>
+      </div>
+
+      <h1 class="wdw-logo-title" style="position:relative;z-index:2;">Disney Parken Wereldwijd</h1>
+      <p class="wdw-logo-sub" style="position:relative;z-index:2;">Tik op een Mickey-ballon om een Disney Resort te kiezen</p>
 
       <!-- INTERACTIVE MICKEY BALLOONS (6 RESORTS WORLDWIDE) -->
-      <div class="wdw-balloons-scroller" id="resort-balloons-bar"></div>
+      <div class="wdw-balloons-scroller" id="resort-balloons-bar" style="position:relative;z-index:2;"></div>
 
       <!-- Welkom, Erwin van Buul! Card with Editable Custom Photo -->
       <div class="wdw-hello-card">
@@ -1078,7 +1177,10 @@
         <div class="wdw-hello-hint" onclick="triggerAvatarUpload()">Foto wijzigen ›</div>
       </div>
 
-      <p class="wdw-discover-tagline" id="hero-resort-tagline">Ontdek de meest magische parken ter wereld!</p>
+      <p class="wdw-discover-tagline" id="hero-resort-tagline" style="position:relative;z-index:2;">Ontdek de meest magische parken ter wereld!</p>
+
+      <!-- SEASONAL LOOK & FEEL BAR (Auto, Halloween, Kerst, Oud & Nieuw, Lente, Zomer, Klassiek) -->
+      <div class="season-pill-scroller" id="season-switcher-bar"></div>
     </header>
 
     <!-- PARK SELECTOR FOR THE CHOSEN RESORT + OPENING HOURS -->
@@ -1499,16 +1601,32 @@
         <span class="wdw-menu-row-left"><span class="wdw-menu-row-icon">🧙‍♂️</span> Standaard avatar herstellen</span>
         <span>Herstel</span>
       </button>
-      <button class="wdw-menu-list-row" onclick="setSeasonTheme('default')">
-        <span class="wdw-menu-row-left"><span class="wdw-menu-row-icon">🏰</span> Thema: Klassiek Disney Blauw</span>
+      <button class="wdw-menu-list-row" onclick="setSeasonTheme('auto'); openScreen('home');">
+        <span class="wdw-menu-row-left"><span class="wdw-menu-row-icon">🗓️</span> Seizoen: Automatisch op Kalender</span>
+        <span>Actief</span>
+      </button>
+      <button class="wdw-menu-list-row" onclick="setSeasonTheme('halloween'); openScreen('home');">
+        <span class="wdw-menu-row-left"><span class="wdw-menu-row-icon">🎃</span> Seizoen: Disney Halloween Festival</span>
         <span>Kies</span>
       </button>
-      <button class="wdw-menu-list-row" onclick="setSeasonTheme('halloween')">
-        <span class="wdw-menu-row-left"><span class="wdw-menu-row-icon">🎃</span> Thema: Disney Halloween Festival</span>
+      <button class="wdw-menu-list-row" onclick="setSeasonTheme('christmas'); openScreen('home');">
+        <span class="wdw-menu-row-left"><span class="wdw-menu-row-icon">🎄</span> Seizoen: Disney's Betoverende Kerst</span>
         <span>Kies</span>
       </button>
-      <button class="wdw-menu-list-row" onclick="setSeasonTheme('christmas')">
-        <span class="wdw-menu-row-left"><span class="wdw-menu-row-icon">🎄</span> Thema: Disney's Betoverende Kerst</span>
+      <button class="wdw-menu-list-row" onclick="setSeasonTheme('newyear'); openScreen('home');">
+        <span class="wdw-menu-row-left"><span class="wdw-menu-row-icon">🎆</span> Seizoen: Oud &amp; Nieuw Vuurwerk</span>
+        <span>Kies</span>
+      </button>
+      <button class="wdw-menu-list-row" onclick="setSeasonTheme('spring'); openScreen('home');">
+        <span class="wdw-menu-row-left"><span class="wdw-menu-row-icon">🌸</span> Seizoen: Lente &amp; Bloemenfestival</span>
+        <span>Kies</span>
+      </button>
+      <button class="wdw-menu-list-row" onclick="setSeasonTheme('summer'); openScreen('home');">
+        <span class="wdw-menu-row-left"><span class="wdw-menu-row-icon">☀️</span> Seizoen: Zomeravond Magie</span>
+        <span>Kies</span>
+      </button>
+      <button class="wdw-menu-list-row" onclick="setSeasonTheme('default'); openScreen('home');">
+        <span class="wdw-menu-row-left"><span class="wdw-menu-row-icon">🏰</span> Seizoen: Klassiek Disney Blauw</span>
         <span>Kies</span>
       </button>
       <button class="wdw-menu-list-row" onclick="forceHardRefresh()">
@@ -1734,10 +1852,188 @@
     let shortWaitOnly = false;
     let favorites = [];
     let customAvatarDataUrl = null;
+    let selectedSeasonMode = 'auto';
+
+    // =========================================================
+    // 🎃🎄🎆🌸☀️ SEIZOENEN ENGINE (AUTO KALENDER + HANDMATIG KIEZEN)
+    // =========================================================
+    const SEASONS = {
+      halloween: {
+        id: 'halloween',
+        chip: '🎃 Halloween',
+        badge: '🎃 DISNEY HALLOWEEN FESTIVAL',
+        title: 'Spooky Magie, Disney Villains & Haunted Mansion',
+        desc: 'De Disney-parken zijn gehuld in duizenden pompoenen, herfstslingers en spannende avondshows! Ontmoet de Disney-schurken en stap in Phantom Manor, Haunted Mansion & The Twilight Zone Tower of Terror.',
+        themeColor: '#3b0764',
+        particles: ['🎃', '🦇', '👻', '🕸️', '🍂'],
+        gradient: 'linear-gradient(135deg, #2e1065 0%, #7c2d12 55%, #ea580c 100%)',
+        tipBadge: '🎃 Halloween-tip',
+        keywords: ['haunted', 'phantom', 'terror', 'tower', 'halloween', 'villain', 'mystic', 'nightmare', 'pirates', 'ghost', 'spooky', 'monster', 'skeleton', 'indiana', 'expedition everest']
+      },
+      christmas: {
+        id: 'christmas',
+        chip: '🎄 Kerst',
+        badge: '🎄 DISNEY’S BETOVERENDE KERST',
+        title: 'Sneeuw op Main Street, Reuzenkerstboom & Kerstparades',
+        desc: 'Beleef de meest warme tijd van het jaar met fonkelende lichtjes op het kasteel, sneeuwval op Main Street U.S.A., Mickey’s Christmas Parade en feestelijke wintershows!',
+        themeColor: '#7f1d1d',
+        particles: ['❄️', '🎄', '⭐', '🦌', '🎁'],
+        gradient: 'linear-gradient(135deg, #7f1d1d 0%, #991b1b 50%, #065f46 100%)',
+        tipBadge: '🎄 Kerst-tip',
+        keywords: ['christmas', 'frozen', 'small world', 'holiday', 'jingle', 'winter', 'snow', 'peter pan', 'believe', 'tales of magic', 'fantasy', 'wondrous', 'sleigh', 'arendelle', 'cinderella', 'beauty and the beast']
+      },
+      newyear: {
+        id: 'newyear',
+        chip: '🎆 Oud & Nieuw',
+        badge: '🎆 MAGISCH OUD & NIEUW VUURWERK',
+        title: 'Spectaculair Aftel-Vuurwerk & Feest in alle Parken',
+        desc: 'Luid het nieuwe jaar in met adembenemende droneshows, symfonisch vuurwerk boven het kasteel en extra lange avondopenstellingen!',
+        themeColor: '#0f172a',
+        particles: ['🎆', '✨', '🥂', '🎇', '🎉'],
+        gradient: 'linear-gradient(135deg, #0f172a 0%, #312e81 55%, #b45309 100%)',
+        tipBadge: '🎆 Vuurwerk-tip',
+        keywords: ['illuminat', 'firework', 'momentous', 'tales of magic', 'dreams', 'fantasmic', 'world of color', 'luminous', 'space mountain', 'tron', 'cosmic rewind', 'starlight']
+      },
+      spring: {
+        id: 'spring',
+        chip: '🌸 Lente',
+        badge: '🌸 LENTE & BLOEMENFESTIVAL',
+        title: 'Kleurrijke Topiaries, Bloesems & Vrolijke Parades',
+        desc: 'Bewonder prachtige Disney-bloemenbeelden (zoals tijdens het EPCOT International Flower & Garden Festival), lenteparades en zonnige ritten door de parken.',
+        themeColor: '#9d174d',
+        particles: ['🌸', '🦋', '🌷', '🌺', '✨'],
+        gradient: 'linear-gradient(135deg, #831843 0%, #db2777 55%, #059669 100%)',
+        tipBadge: '🌸 Lente-tip',
+        keywords: ['garden', 'flower', 'safari', 'soarin', 'alice', 'teacups', 'dumbo', 'storybook', 'rapunzel', 'tangled', 'fairy', 'nature', 'living with the land']
+      },
+      summer: {
+        id: 'summer',
+        chip: '☀️ Zomer',
+        badge: '☀️ ZOMERAVOND MAGIE & WATERPRET',
+        title: 'Lange Zomeravonden, Waterattracties & Zomershows',
+        desc: 'Geniet van lange zomerse parkdagen tot laat in de avond, verfrissende waterattracties en spectaculaire fonteinen- en avondshows!',
+        themeColor: '#0369a1',
+        particles: ['☀️', '🌴', '🌊', '🍦', '🌺'],
+        gradient: 'linear-gradient(135deg, #0369a1 0%, #0284c7 55%, #ea580c 100%)',
+        tipBadge: '☀️ Zomer-tip',
+        keywords: ['splash', 'tiana', 'kali', 'grizzly', 'pirates', 'water', 'lagoon', 'jungle', 'moana', 'crush', 'nemo', 'aquatopia', 'roaring rapids', 'thunder']
+      },
+      default: {
+        id: 'default',
+        chip: '🏰 Klassiek Blauw',
+        badge: '✨ KLASSIEKE DISNEY MAGIE',
+        title: 'Tijdloze Sprookjes, Kastelen & Wereldberoemde Attracties',
+        desc: 'Beleef de originele blauwe Disney-parkstijl met alle klassiekers, parades, D-Tales Radio en live wachttijden voor alle 12 parken ter wereld.',
+        themeColor: '#0055a5',
+        particles: ['✨', '🏰', '👑', '🎈', '🌟'],
+        gradient: 'linear-gradient(135deg, #004e9a 0%, #0077cc 55%, #38bdf8 100%)',
+        tipBadge: '✨ Disney-klassieker',
+        keywords: ['mickey', 'castle', 'pirates', 'space mountain', 'big thunder', 'small world', 'peter pan', 'dumbo', 'parade']
+      }
+    };
+
+    function detectDisneySeasonByDate(d = new Date()) {
+      const m = d.getMonth() + 1;
+      const day = d.getDate();
+      if ((m === 12 && day === 31) || (m === 1 && day <= 6)) return 'newyear';
+      if (m === 9 || m === 10 || (m === 11 && day <= 4)) return 'halloween';
+      if ((m === 11 && day >= 5) || (m === 12 && day <= 30)) return 'christmas';
+      if (m >= 3 && m <= 5) return 'spring';
+      if (m >= 6 && m <= 8) return 'summer';
+      return 'default';
+    }
+
+    function getActiveSeasonKey() {
+      if (selectedSeasonMode === 'auto') return detectDisneySeasonByDate();
+      return SEASONS[selectedSeasonMode] ? selectedSeasonMode : 'default';
+    }
+
+    function getCountdownHint() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = now.getMonth() + 1;
+      const day = now.getDate();
+      if (m === 10 && day <= 31) {
+        const diff = 31 - day;
+        if (diff === 0) return '🎃 Vandaag is het Halloween! • 🎄 Kerstseizoen start over 5 dagen';
+        return `🎃 Nog ${diff} ${diff === 1 ? 'dag' : 'dagen'} tot Halloween • 🎄 Kerst vanaf 5 nov`;
+      }
+      if (m === 11 && day < 5) {
+        const diff = 5 - day;
+        return `🎄 Disney's Kerstseizoen start over ${diff} ${diff === 1 ? 'dag' : 'dagen'}!`;
+      }
+      if ((m === 11 && day >= 5) || (m === 12 && day <= 25)) {
+        const xmas = new Date(y, 11, 25);
+        const diff = Math.max(0, Math.ceil((xmas - now) / 86400000));
+        return diff === 0 ? '🎄 Vrolijk Kerstfeest in alle Disney Parken!' : `🎄 Kerst in de parken • Nog ${diff} dagen tot Kerstmis`;
+      }
+      return '✨ Live Seizoenen-Sfeer voor alle 12 Disney-parken';
+    }
+
+    function isSeasonalItem(name, seasonObj) {
+      const l = name.toLowerCase();
+      return seasonObj.keywords.some(k => l.includes(k));
+    }
+
+    function renderSeasonExperience() {
+      const activeKey = getActiveSeasonKey();
+      const s = SEASONS[activeKey] || SEASONS.default;
+      const autoKey = detectDisneySeasonByDate();
+      const autoSeason = SEASONS[autoKey] || SEASONS.default;
+
+      document.body.setAttribute('data-season', activeKey);
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) metaTheme.setAttribute('content', s.themeColor);
+
+      // 1. Top pill in header
+      const bannerPill = document.getElementById('season-banner-pill');
+      if (bannerPill) {
+        bannerPill.innerHTML = `<span>${s.badge}</span> <span style="opacity:0.75;">•</span> <span style="font-weight:700;color:#fde68a;">${getCountdownHint()}</span>`;
+      }
+
+      // 2. Floating seasonal particles in hero header
+      const pBox = document.getElementById('season-particles-box');
+      if (pBox) {
+        const count = 14;
+        const parts = [];
+        for (let i = 0; i < count; i++) {
+          const icon = s.particles[i % s.particles.length];
+          const left = ((i * 7.3) + 3) % 95;
+          const dur = (6 + (i % 5) * 1.4).toFixed(1);
+          const delay = ((i * 0.65) % 5).toFixed(1);
+          const size = 15 + (i % 3) * 4;
+          parts.push(`<span class="season-particle" style="left:${left}%;animation-duration:${dur}s;animation-delay:-${delay}s;font-size:${size}px;">${icon}</span>`);
+        }
+        pBox.innerHTML = parts.join('');
+      }
+
+      // 3. Interactive Season Switcher Bar in Hero Header
+      const switcher = document.getElementById('season-switcher-bar');
+      if (switcher) {
+        const modes = [
+          { key: 'auto', label: `🗓️ Auto (${autoSeason.chip.split(' ')[0]})` },
+          { key: 'halloween', label: '🎃 Halloween' },
+          { key: 'christmas', label: '🎄 Kerst' },
+          { key: 'newyear', label: '🎆 Oud & Nieuw' },
+          { key: 'spring', label: '🌸 Lente' },
+          { key: 'summer', label: '☀️ Zomer' },
+          { key: 'default', label: '🏰 Klassiek' }
+        ];
+        switcher.innerHTML = modes.map(m => `
+          <button class="season-chip-btn ${selectedSeasonMode === m.key ? 'active' : ''}" onclick="setSeasonTheme('${m.key}')">
+            ${m.label}
+          </button>
+        `).join('');
+      }
+    }
 
     try {
       favorites = JSON.parse(localStorage.getItem('disney_rea_favs') || '[]');
       customAvatarDataUrl = localStorage.getItem('disney_erwin_avatar') || null;
+      const savedSeason = localStorage.getItem('disney_rea_season_mode');
+      if (savedSeason && (savedSeason === 'auto' || SEASONS[savedSeason])) {
+        selectedSeasonMode = savedSeason;
+      }
       const savedResort = localStorage.getItem('disney_selected_resort');
       if (savedResort && RESORT_BALLOONS.some(r => r.id === savedResort)) {
         currentResortId = savedResort;
@@ -1748,7 +2044,7 @@
 
     // Service Worker registration with auto-reload
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js?v=7').then(reg => {
+      navigator.serviceWorker.register('./sw.js?v=8').then(reg => {
         reg.update();
       }).catch(() => {});
       let reloading = false;
@@ -2211,8 +2507,64 @@
       ` : '';
 
       const b = activeResort.specialBanner;
+      const activeSeason = SEASONS[getActiveSeasonKey()] || SEASONS.default;
+
+      // Seasonal highlights for this specific park
+      const seasonalRides = p.attractions.filter(a => isSeasonalItem(a.name, activeSeason)).slice(0, 3);
+      const seasonalShows = cleanShows.filter(s => isSeasonalItem(s.name, activeSeason)).slice(0, 2);
+      const seasonalMatches = [
+        ...seasonalRides.map(a => ({
+          icon: '🎢',
+          name: a.name,
+          sub: activeSeason.tipBadge + ' • Attractie in ' + p.name,
+          right: getEffectiveWait(a) !== null ? (getEffectiveWait(a) + ' min') : (a.status === 'OPERATING' ? 'Nu Open' : 'Gesloten')
+        })),
+        ...seasonalShows.map(s => ({
+          icon: '🎭',
+          name: s.name,
+          sub: activeSeason.tipBadge + ' • Show / Parade',
+          right: (s.showtimes && s.showtimes[0]) ? ('🕒 ' + s.showtimes[0]) : 'Vandaag'
+        }))
+      ].slice(0, 4);
+
+      const seasonalRowsHtml = seasonalMatches.length > 0 ? seasonalMatches.map(item => `
+        <div class="highlight-mini-row">
+          <div style="min-width:0;flex:1;">
+            <div style="font-size:15px;font-weight:700;color:var(--wdw-navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.icon} ${item.name}</div>
+            <div style="font-size:12px;font-weight:700;color:var(--wdw-blue);">${item.sub}</div>
+          </div>
+          <span style="font-size:13px;font-weight:800;color:var(--wdw-navy);background:#f1f5f9;padding:4px 10px;border-radius:999px;flex-shrink:0;">
+            ${item.right}
+          </span>
+        </div>
+      `).join('') : '';
+
+      const seasonalFeedCardHtml = `
+        <section class="wdw-feed-card">
+          <div style="height:175px;border-radius:12px;margin-bottom:12px;background:${activeSeason.gradient};display:flex;flex-direction:column;justify-content:flex-end;padding:18px;color:#ffffff;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:12px;right:14px;font-size:38px;opacity:0.95;">${activeSeason.particles.slice(0, 3).join(' ')}</div>
+            <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;color:#fde68a;">${activeSeason.badge}</span>
+            <div style="font-size:21px;font-weight:900;line-height:1.15;margin-top:4px;">${activeSeason.title}</div>
+            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.92);margin-top:4px;">${getCountdownHint()}</div>
+          </div>
+          <h3 class="wdw-feed-title">${activeSeason.chip} in ${p.name}</h3>
+          <p class="wdw-feed-desc" style="margin-bottom:10px;">${activeSeason.desc}</p>
+          ${seasonalRowsHtml ? `<div style="margin-bottom:12px;">${seasonalRowsHtml}</div>` : ''}
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button class="wdw-pill-btn" style="padding:7px 13px;font-size:12px;" onclick="setSeasonTheme('halloween')">🎃 Halloween</button>
+              <button class="wdw-pill-btn" style="padding:7px 13px;font-size:12px;" onclick="setSeasonTheme('christmas')">🎄 Kerst</button>
+              <button class="wdw-pill-btn" style="padding:7px 13px;font-size:12px;" onclick="setSeasonTheme('newyear')">🎆 Oud &amp; Nieuw</button>
+              <button class="wdw-pill-btn" style="padding:7px 13px;font-size:12px;" onclick="setSeasonTheme('spring')">🌸 Lente</button>
+              <button class="wdw-pill-btn" style="padding:7px 13px;font-size:12px;" onclick="setSeasonTheme('summer')">☀️ Zomer</button>
+            </div>
+            <button class="wdw-link-chevron" onclick="setSeasonTheme('auto')">🗓️ Auto ›</button>
+          </div>
+        </section>
+      `;
 
       feed.innerHTML = `
+        ${seasonalFeedCardHtml}
         ${resortParksOverviewHtml}
 
         <!-- HIGHLIGHT CARD 1: TOP ATTRACTIES & WACHTTIJDEN VAN DIT PARK -->
@@ -2496,6 +2848,8 @@
       const saved = favorites.some(f => f.key === key);
       const safeName = a.name.replace(/'/g, "\\'");
       const safePark = p.name.replace(/'/g, "\\'");
+      const activeSeason = SEASONS[getActiveSeasonKey()] || SEASONS.default;
+      const seasonalBadge = isSeasonalItem(a.name, activeSeason) ? ` • <span style="color:#d97706;font-weight:800;">${activeSeason.tipBadge}</span>` : '';
       const subParts = [p.name];
       if (a.paidPrice) subParts.push('⚡ Premier / Lightning Lane: ' + a.paidPrice);
       else if (w !== null) subParts.push('Reguliere wachtrij');
@@ -2503,7 +2857,7 @@
       return `
         <div class="wdw-list-card">
           <div class="wdw-list-info">
-            <div class="wdw-list-cat">🎢 Attractie</div>
+            <div class="wdw-list-cat">🎢 Attractie${seasonalBadge}</div>
             <h3 class="wdw-list-title">${a.name}</h3>
             <p class="wdw-list-sub">${subParts.join(' • ')}</p>
             <button class="wdw-link-chevron" style="font-size:12px;padding:4px 0 0;" onclick="toggleFav('${safePark}', '${p.country}', '${safeName}', 'Attractie', '${numStr} ${unitStr}')">
@@ -2525,12 +2879,14 @@
       const saved = favorites.some(f => f.key === key);
       const safeName = s.name.replace(/'/g, "\\'");
       const safePark = p.name.replace(/'/g, "\\'");
+      const activeSeason = SEASONS[getActiveSeasonKey()] || SEASONS.default;
+      const seasonalBadge = isSeasonalItem(s.name, activeSeason) ? ` • <span style="color:#d97706;font-weight:800;">${activeSeason.tipBadge}</span>` : '';
       const catLabel = cat === 'parades' ? '🎉 Parade & Avondshow' : (cat === 'characters' ? '🎭 Disney Figuur (Meet & Greet)' : '🎩 Show & Musical');
 
       return `
         <div class="wdw-list-card">
           <div class="wdw-list-info">
-            <div class="wdw-list-cat">${catLabel}</div>
+            <div class="wdw-list-cat">${catLabel}${seasonalBadge}</div>
             <h3 class="wdw-list-title">${s.name}</h3>
             <p class="wdw-list-sub">🕒 ${timeStr}</p>
             <button class="wdw-link-chevron" style="font-size:12px;padding:4px 0 0;" onclick="toggleFav('${safePark}', '${p.country}', '${safeName}', '${catLabel}', '${timeStr}')">
@@ -2710,7 +3066,11 @@
     }
 
     function setSeasonTheme(mode) {
-      document.body.setAttribute('data-season', mode);
+      selectedSeasonMode = mode;
+      try { localStorage.setItem('disney_rea_season_mode', mode); } catch (_) {}
+      renderSeasonExperience();
+      renderParkHighlightsFeed();
+      if (currentScreen === 'map') renderMapAndList();
     }
 
     async function refreshCurrentParkLive(manual = false) {
@@ -2767,6 +3127,7 @@
     }
 
     // Initialize App
+    renderSeasonExperience();
     renderAvatarBoxes();
     saveFavs();
     renderResortBalloons();

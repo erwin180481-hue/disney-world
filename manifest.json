@@ -2,7 +2,7 @@
   "name": "Disney Parken Wereldwijd & D-Tales",
   "short_name": "DisneyParken",
   "description": "Alle 12 Disney Parken ter Wereld, Wachttijden, Kaart, Shows, Parades & D-Tales Radio",
-  "start_url": "./?v=7",
+  "start_url": "./?v=8",
   "display": "standalone",
   "background_color": "#0c7cd5",
   "theme_color": "#0c7cd5",
