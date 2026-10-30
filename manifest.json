@@ -1,7 +1,7 @@
 {
   "name": "Disney World & Musicals Explorer",
   "short_name": "DisneyWorld",
-  "description": "Wereldwijde Disney Parken, Wachttijden & Musicals (Gebouwd met REA)",
+  "description": "Wereldwijde Disney Parken, Wachttijden, Musicals & Seizoenen (REA)",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#0f172a",
