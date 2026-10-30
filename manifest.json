@@ -1,11 +1,11 @@
 {
-  "name": "Disney World, Musicals & D-Tales Radio",
+  "name": "Walt Disney World & D-Tales App",
   "short_name": "DisneyWorld",
-  "description": "Wereldwijde Disney Parken, Wachttijden, Parades, Musicals & D-Tales Radio (REA)",
-  "start_url": "./",
+  "description": "My Disney Experience, Wachttijden, Kaart, Shows, Parades & Live D-Tales Radio",
+  "start_url": "./?v=6",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#1e1b4b",
+  "background_color": "#0c7cd5",
+  "theme_color": "#0c7cd5",
   "icons": [
     {
       "src": "./apple-touch-icon.png",

@@ -1,8 +1,8 @@
-const CACHE_NAME = 'disney-rea-pwa-v5';
+const CACHE_NAME = 'disney-rea-pwa-v6';
 const ASSETS = ['./', './index.html', './manifest.json', './apple-touch-icon.png'];
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
   self.skipWaiting();
+  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)).catch(() => {}));
 });
 self.addEventListener('activate', e => {
   e.waitUntil(
@@ -15,17 +15,17 @@ self.addEventListener('fetch', e => {
   if (e.request.url.includes('api.themeparks.wiki') || e.request.url.includes('radio.d-tales.nl')) {
     return;
   }
-  if (e.request.mode === 'navigate' || e.request.url.endsWith('.html') || e.request.url.endsWith('/')) {
+  if (e.request.mode === 'navigate' || e.request.url.includes('.html') || e.request.url.endsWith('/') || e.request.url.includes('?v=')) {
     e.respondWith(
-      fetch(e.request).then(res => {
+      fetch(e.request, { cache: 'no-store' }).then(res => {
         const copy = res.clone();
-        caches.open(CACHE_NAME).then(c => c.put(e.request, copy));
+        caches.open(CACHE_NAME).then(c => c.put('./index.html', copy));
         return res;
-      }).catch(() => caches.match(e.request))
+      }).catch(() => caches.match('./index.html') || caches.match(e.request))
     );
     return;
   }
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request))
+    fetch(e.request).catch(() => caches.match(e.request))
   );
 });
