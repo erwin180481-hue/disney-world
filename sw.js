@@ -1,4 +1,4 @@
-const CACHE_NAME = 'disney-rea-pwa-v4';
+const CACHE_NAME = 'disney-rea-pwa-v5';
 const ASSETS = ['./', './index.html', './manifest.json', './apple-touch-icon.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
@@ -12,7 +12,7 @@ self.addEventListener('activate', e => {
   );
 });
 self.addEventListener('fetch', e => {
-  if (e.request.url.includes('api.themeparks.wiki')) {
+  if (e.request.url.includes('api.themeparks.wiki') || e.request.url.includes('radio.d-tales.nl')) {
     return;
   }
   if (e.request.mode === 'navigate' || e.request.url.endsWith('.html') || e.request.url.endsWith('/')) {

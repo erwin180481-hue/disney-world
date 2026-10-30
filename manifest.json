@@ -1,7 +1,7 @@
 {
-  "name": "Disney World & Musicals Explorer",
+  "name": "Disney World, Musicals & D-Tales Radio",
   "short_name": "DisneyWorld",
-  "description": "Wereldwijde Disney Parken, Actuele Wachttijden, Musicals & Seizoenen (REA)",
+  "description": "Wereldwijde Disney Parken, Wachttijden, Parades, Musicals & D-Tales Radio (REA)",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#0f172a",
