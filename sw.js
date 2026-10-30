@@ -1,4 +1,4 @@
-const CACHE_NAME = 'disney-rea-pwa-v6';
+const CACHE_NAME = 'disney-rea-pwa-v7';
 const ASSETS = ['./', './index.html', './manifest.json', './apple-touch-icon.png'];
 self.addEventListener('install', e => {
   self.skipWaiting();

@@ -1,8 +1,8 @@
 {
-  "name": "Walt Disney World & D-Tales App",
-  "short_name": "DisneyWorld",
-  "description": "My Disney Experience, Wachttijden, Kaart, Shows, Parades & Live D-Tales Radio",
-  "start_url": "./?v=6",
+  "name": "Disney Parken Wereldwijd & D-Tales",
+  "short_name": "DisneyParken",
+  "description": "Alle 12 Disney Parken ter Wereld, Wachttijden, Kaart, Shows, Parades & D-Tales Radio",
+  "start_url": "./?v=7",
   "display": "standalone",
   "background_color": "#0c7cd5",
   "theme_color": "#0c7cd5",
